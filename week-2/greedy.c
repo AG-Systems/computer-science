@@ -6,7 +6,6 @@ int main(void)
 {
 	float change;
 	int coins = 0;
-	int stage1;
 	/*
 	float quator = 0.25;
 	float dime = 0.10;
