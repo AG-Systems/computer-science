@@ -12,7 +12,7 @@ int main(void)
 	for(int x = 0; x < (space); x++)
 	{
 		counter++;
-		if(x = 0)
+		if(x == 0)
 		{
 			hash = 2;
 		}
