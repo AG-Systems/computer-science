@@ -17,29 +17,28 @@ int main(void)
 	int dime = 10;
 	int nickel = 5;
 	int penny = 1;
-	scanf("%d", &change);
-	int convert = change * 100;
+	scanf("%f", &change);
+	long long convert = change * 100;
 	while (convert / quator)
 	{
 		coins++;
-		int stage1 = convert - quator;
+		convert = convert - quator;
 	}
 	while (convert / dime)
 	{
 		coins++;
-		int stage1 = convert - dime;
+		convert - dime;
 	}
 	while (convert / nickel)
 	{
 		coins++;
-		int stage1 = convert - nickel;
+		convert - nickel;
 	}
 	while( convert / penny)
 	{
 		coins++;
-		int stage1 = convert - penny;
+		convert - penny;
 	}
 	printf("%d", coins);
 	system("PAUSE");
 }
-// fix the change * 100
