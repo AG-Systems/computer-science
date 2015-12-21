@@ -42,3 +42,4 @@ int main(void)
 	printf("%d", coins);
 	system("PAUSE");
 }
+// fix the change * 100
