@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <Windows.h>
 
 int main(void)
 {
@@ -32,5 +31,4 @@ int main(void)
 		printf("\n");
 		}
 	}
-	system("PAUSE");
 }
