@@ -4,7 +4,7 @@
 - **GitHub**: [Click here or check my name! ](https://github.com/AG-Systems)
 - **Twitter**: []()
 - **Linkedin**: []()
-- **Website**: [xauriga.com](xauriga.com)
+- **Website**: [xauriga.com](http://xauriga.com)
 
 ## Completed Courses
 
