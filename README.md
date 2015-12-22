@@ -12,4 +12,4 @@
 
 Course|Files
 :--|:--:
-Course Name| [link]()
+Introduction to Computer Science | []()
