@@ -12,4 +12,4 @@
 
 Course|Files
 :--|:--:
-Introduction to Computer Science | [Week-3]()
+Introduction to Computer Science | [Week-3](https://github.com/AG-Systems/computer-science)
