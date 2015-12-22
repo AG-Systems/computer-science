@@ -2,8 +2,8 @@
 
 - **Name**: Max
 - **GitHub**: [@AG-Systmes]()
-- **Twitter**: [@your_username]()
-- **Linkedin**: [link]()
+- **Twitter**: []()
+- **Linkedin**: []()
 - **Website**: [xauriga.com]()
 
 ## Completed Courses
