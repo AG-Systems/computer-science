@@ -12,4 +12,4 @@
 
 Course|Files
 :--|:--:
-Introduction to Computer Science | [](Working on it)
+Introduction to Computer Science | [week3](Working on it)
