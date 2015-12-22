@@ -1,7 +1,7 @@
 # computer-science
 
 - **Name**: Max
-- **GitHub**: [@AG-Systmes]()
+- **GitHub**: [@AG-Systems]()
 - **Twitter**: []()
 - **Linkedin**: []()
 - **Website**: [xauriga.com]()
