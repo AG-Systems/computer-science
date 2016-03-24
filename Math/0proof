@@ -7,4 +7,6 @@ Why is 0 even?
 
 3. The proof rule of if x = even, then x^2 = even. 0 ^ 2 = 0, which is odd.
 
-
+// 2nd rule is a really good rule. 3rd rule is decent and first just needs to be explained. First rule needs to be re written in a way to 
+// say how if you count up 2 or less 2 , it will be even. That can easily prove with 0 + 2 = 2 which is even and vice versa. 
+// that can explain the odd even table. 
