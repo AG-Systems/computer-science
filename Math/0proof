@@ -1,1 +1,10 @@
+Why is 0 even?
+
+1. If you look at the even, odd table you can see it goes back and forth to infinity. 0 is on the table between 2 odd nums.
+
+2. The proof adding a odd num to a even num = odd num means the original num that you added to is even. SO it if you add 
++1 to 0, it becomes odd. 
+
+3. The proof rule of if x = even, then x^2 = even. 0 ^ 2 = 0, which is odd.
+
 
