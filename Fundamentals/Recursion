@@ -1,0 +1,7 @@
+Q: Is the recursive version usually faster? 
+A: No -- it's usually slower (due to the overhead of maintaining the stack)
+Q: Does the recursive version usually use less memory? 
+A: No -- it usually uses more memory (for the stack).
+
+Q: Then why use recursion?? 
+A: Sometimes it is much simpler to write the recursive version
