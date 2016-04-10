@@ -8,7 +8,7 @@
 
 ## Completed Courses
 
-**Name of the Section**
+**Introduction to Computer Science**
 
 Course|Files
 :--|:--:
