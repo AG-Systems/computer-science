@@ -1,0 +1,34 @@
+Psudocode topic: Make your favorite sandwich
+
+Open fridge
+Search for bread bag
+Grab bread bag
+Move it and place it on table
+Open bread bag
+Take out the first bread you can grab
+Go back to fridge
+Grab peanut butter and jelly
+Close fridge door
+Place peanut butter and jelly on table
+Open the peanut butter jar and the jelly jar
+Grab knife on table and stick it into the peanut butter
+While(Bottom bread is not fully covered in peanut butter)
+	Spread the peanut butter on the bottom bread
+	If(knife runs out of peanut butter)
+		Stick it back into the peanut butter
+	endif
+Endloop
+Stick the knife into the jelly
+While(bread is not fully covered in jelly)
+	Spread the jelly on the bottom bread
+	If(knife runs out of Jelly)
+		Stick it back into the Jelly
+	endif
+End loop
+Place down the knife
+Grab the uncovered top bread
+Place it top of the bottom bread that has the spread facing up
+Finished
+
+
+
