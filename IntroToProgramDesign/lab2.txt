@@ -1,0 +1,17 @@
+CIS254 Lab 2
+Reviewer: 
+Problem 1:
+Start , turnRight, Move , MoveturnLeftMove, Move, turnLeft, Move, Move, TurnLeft ,pickBeeper ,turnLeft, Move ,turn ,LeftMove ,turnRight ,Move ,TurnRight ,Move ,Move ,turnRight ,Move ,Move ,putBeeper ,turnLeft
+Problem 2
+Move ,turnLeft ,Move ,Move ,turnRight ,Move ,turnLeft ,Move ,Move ,turnRight ,Move ,putBeeper ,Move ,turnRight ,Move ,Move ,turnLeft ,Move ,turnRight ,Move ,Move ,turnLeft
+Problem 3:
+Read the customers age and item price
+If the customer’s age is less then 65, do this:
+	Assign 0 as the discount rate
+Print the amount due
+Otherwise, do this:
+	Assign 10% as the discount rate
+Calculate the amount due by subtracting the discount rate from the number 1, and then multiplying the result by the item price.
+	
+
+	
