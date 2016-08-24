@@ -1,0 +1,49 @@
+1.)
+Start
+Repeat 2 times:
+      	turnLeft, 
+	Repeat 2 times:
+		move
+	pickBeeper
+	move
+	turnRight
+	move
+	pickBeeper
+	turnLeft
+	move
+	turnRight
+	move
+	pickBeeper
+	move
+	pickBeeper
+	turnRight
+	repeat 2 times:
+		move
+	turnRight
+	Repeat 3 times:
+		move
+	turnLeft
+	repeat 2 times:
+		move
+	End
+	
+	
+2)
+Version 1:
+Read the customers age and item price
+If the customer’s age is less then 65, do this:
+        Assign 0 as the discount rate
+        Print the amount due
+Else, do this:
+        Assign 10% as the discount rate
+        Calculate the amount due by subtracting the discount rate from the number 1, and then       	multiplying the result by the item price.
+        Print the amount due
+Version 2:
+Read the customers age and item price
+If the customer’s age is less then 65, do this:
+        Assign 0 as the discount rate
+        Print the amount due
+If the customer's age is greater than or equal to 65, do this:
+        Assign 10% as the discount rate
+        Calculate the amount due by subtracting the discount rate from the number 1, and then       	multiplying the result by the item price.
+         Print the amount due
