@@ -1,8 +1,8 @@
-// Max
+// Max C
 
 //CIS254 Lab 4
 
-//This program will calculate total amount of money earned and the total amount of tickets.
+//This program will calculate the total price of tickets and count the total amount of tickets
 
 import java.util.Scanner;
 
@@ -33,6 +33,26 @@ public class lab3
 	  child_tickets = input.nextInt();	
 	  ticketsales(adult_tickets,child_tickets);
 	  totaltickets(adult_tickets,child_tickets);
-	  System.out.println("Made By Max");	  
+	  System.out.println("Made By Max C");	  
   }
 }
+
+/* Testing/Runtime output
+Test case 1
+
+How many adult tickets?100
+How many child tickets?10
+The total price is: $950.0
+The total amount of tickets are: 110
+Made By Max C
+
+Test case 2
+
+How many adult tickets?10
+How many child tickets?5
+The total price is: $115.0
+The total amount of tickets are: 15
+Made By Max C
+
+
+ */
