@@ -2,7 +2,7 @@
 
 //CIS254 Lab 4
 
-//This program will… (describe what it does in 1 or 2 lines)
+//This program will calculate total amount of money earned and the total amount of tickets.
 
 import java.util.Scanner;
 
