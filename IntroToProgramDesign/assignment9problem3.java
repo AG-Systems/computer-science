@@ -12,7 +12,7 @@ public class assignment9problem3
 			total += counter;
 			counter++;
 		}
-		System.out.println("The sum of 1 to " + num + " is " + total);;
+		System.out.println("The sum of 1 to " + num + " is " + total);
 	}
 	public static void main(String[] args) 
 	{
