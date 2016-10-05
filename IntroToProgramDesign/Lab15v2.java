@@ -13,7 +13,7 @@ public class Lab15
 		Scanner input = new Scanner(System.in);
 		System.out.print("How many tellers? ");
 		amount = input.nextInt();
-		for(int z = 1; z < (amount+1); z++)
+		for(int z = 1; z <= amount; z++)
 		{
 			for(int x = 1; x <= 3; x++)
 			{
