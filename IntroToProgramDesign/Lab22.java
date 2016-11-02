@@ -7,7 +7,7 @@ public class lab22
 	static Scanner input = new Scanner(System.in);
 	public static float calcAvg(double[] array)
 	{
-		int total = 0;
+		double total = 0;
 		float average;
 		for(int z = 0; z < array.length; z++)
 		{
@@ -49,9 +49,9 @@ public class lab22
 			}
 		}
 	}
-	public static void getValues(double[] array, int amount)
+	public static void getValues(double[] array)
 	{
-		for(int z = 0; z < amount; z++)
+		for(int z = 0; z < array.length; z++)
 		{
 			System.out.print("Enter test " + (z+1) + ": ");
 			array[z] = input.nextInt();
@@ -64,7 +64,7 @@ public class lab22
 		amount = input.nextInt();
 		double[] array1;
 		array1 = new double[amount];
-		getValues(array1, amount);
+		getValues(array1);
 		System.out.println("Your average is " + calcAvg(array1));
 		System.out.println("Your grade is " + calcGrade(calcAvg(array1)));
 	}
