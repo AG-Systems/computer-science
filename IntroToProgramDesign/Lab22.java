@@ -59,7 +59,6 @@ public class lab22
 	}
 	public static void main(String[] args) 
 	{
-		boolean running = true;
 		int amount = 0;
 		System.out.print("How many tests? ");
 		amount = input.nextInt();
