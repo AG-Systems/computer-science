@@ -6,7 +6,10 @@ class Hashtable(object):
         size = len(self.container)
         if size < 1:
             size = 1
-        self.container.insert((hashval % size),val)
+        if size > hashval % size:
+            self.container.insert((hashval % size),val)
+        else:
+            self.container.append(val)
     def tableprint(self):
         print(self.container)
     def lookup(self,key):
