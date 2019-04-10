@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <cassert>
+#include <string>
+
 
 using namespace std;
 
@@ -14,6 +16,36 @@ class Fraction
         Fraction(int num = 0, int den = 1);
         int get_numerator();
         int get_denominator();
+        void set_numerator(int num = 0);
+        void set_denominator(int den = 1);
+        friend bool operator<(const Fraction& left, 
+                           const Fraction& right);
+         friend bool operator<=(const Fraction& left, 
+                     const Fraction& right);
+        friend bool operator>(const Fraction& left, 
+                        const Fraction& right);
+         friend bool operator>=(const Fraction& left, 
+                  const Fraction& right);
+        friend Fraction operator+(const Fraction& left, 
+                           const Fraction& right);
+        friend Fraction operator-(const Fraction& left, 
+                           const Fraction& right);
+         friend Fraction operator*(const Fraction& left, 
+                     const Fraction& right);
+         friend Fraction operator/(const Fraction& left, 
+                     const Fraction& right);
+
+
+        Fraction operator++();
+        Fraction operator++(int val);  
+        Fraction operator--();
+        Fraction operator--(int val);
+
+        Fraction operator+=(const Fraction& right);
+        Fraction operator*=(const Fraction& right);
+        Fraction operator-=(const Fraction& right);
+        Fraction operator/=(const Fraction& right);       
+
     private:
         int numerator, denominator;
 }; 
@@ -26,6 +58,7 @@ Fraction::Fraction(int num, int den)
     denominator = den; 
 }
 
+
 int Fraction::get_numerator()
 {
     return numerator;
@@ -36,12 +69,277 @@ int Fraction::get_denominator()
     return denominator;
 }
 
-ostream& operator<<(ostream& out, const Fraction& fraction_object)
+void Fraction::set_numerator(int num)
 {
-    // out << right.feet << " feet, " << right.inches << " inches";   
-    // fraction_object 
+    numerator = num;
+}
+
+void Fraction::set_denominator(int den)
+{
+    denominator = den;
+}
+
+ostream& operator<<(ostream& out, const Fraction& fraction_object)
+{   
+    out << fraction_object.get_numerator << "|" << fraction_object.get_denominator; 
     return out;
 }
+
+bool operator<(const Fraction& left, const Fraction& right)
+{
+  if(left.get_numerator && right.get_numerator)
+  {
+   int left_side = right.get_numerator * left.get_denominator;
+   int right_side = right.get_denominator * left.get_numerator;
+
+   return left_side < right_side;
+  }
+  
+  if(left.get_numerator)
+  {
+   int left_side = right * left.get_denominator;
+   int right_side = right.get_denominator * 1;
+
+   return left_side < right_side;     
+  }
+
+  if(right.get_numerator)
+  {
+   int left_side = right.get_numerator * 1;
+   int right_side = right.get_denominator * left;
+
+   return left_side < right_side;     
+  }
+
+}
+
+bool operator<=(const Fraction& left, const Fraction& right)
+{
+  if(left.get_numerator && right.get_numerator)
+  {
+   int left_side = right.get_numerator * left.get_denominator;
+   int right_side = right.get_denominator * left.get_numerator;
+
+   return left_side <= right_side;
+  }
+  
+  if(left.get_numerator)
+  {
+   int left_side = right * left.get_denominator;
+   int right_side = right.get_denominator * 1;
+
+   return left_side <= right_side;     
+  }
+
+  if(right.get_numerator)
+  {
+   int left_side = right.get_numerator * 1;
+   int right_side = right.get_denominator * left;
+
+   return left_side <= right_side;     
+  }
+
+}
+
+bool operator>(const Fraction& left, const Fraction& right)
+{
+
+  if(left.numerator && right.numerator)
+  {
+   int left_side = right.numerator * left.denominator;
+   int right_side = right.denominator * left.numerator;
+
+   return left_side > right_side;
+  }
+  
+  if(left.numerator)
+  {
+   // int left_side = right * left.denominator;
+   int left_side = 1;
+   int right_side = right.denominator * 1;
+   
+   return left_side > right_side;     
+  }
+
+  if(right.numerator)
+  {
+   int left_side = right.numerator * 1;
+   // int right_side = right.denominator * left;
+   int right_side = 1;
+   return left_side > right_side;     
+  }
+}
+
+bool operator>=(const Fraction& left, const Fraction& right)
+{
+
+  if(left.numerator && right.numerator)
+  {
+   int left_side = right.numerator * left.denominator;
+   int right_side = right.denominator * left.numerator;
+
+   return left_side >= right_side;
+  }
+  
+  if(left.numerator)
+  {
+   // int left_side = right * left.denominator;
+   int left_side = 1;
+   int right_side = right.denominator * 1;
+   
+   return left_side >= right_side;     
+  }
+
+  if(right.numerator)
+  {
+   int left_side = right.numerator * 1;
+   // int right_side = right.denominator * left;
+   int right_side = 1;
+   return left_side >= right_side;     
+  }
+}
+
+
+Fraction operator+(const Fraction& left, 
+                     const Fraction& right)
+{
+   Fraction left_side_clone;
+   Fraction right_side_clone;
+
+   if(left.get_numerator && right.get_numerator)
+   {
+       right_side_clone.denominator = right.denominator * left.denominator;
+       right_side_clone.numerator = left.denominator * right.numerator;
+
+       left_side_clone.denominator = right.denominator * left.denominator;
+       left_side_clone.numerator = right.denominator * left.numerator;
+
+      Fraction temp(left_side_clone.numerator + right_side_clone.numerator, left_side_clone.denominator);
+      return temp;
+   
+   }
+}
+
+Fraction operator*(const Fraction& left, 
+                     const Fraction& right) // INCOMPLETE
+{
+   Fraction left_side_clone;
+   Fraction right_side_clone;
+
+   if(left.get_numerator && right.get_numerator)
+   {
+       right_side_clone.denominator = right.denominator * left.denominator;
+       right_side_clone.numerator = left.denominator * right.numerator;
+
+       left_side_clone.denominator = right.denominator * left.denominator;
+       left_side_clone.numerator = right.denominator * left.numerator;
+
+      Fraction temp(left_side_clone.numerator + right_side_clone.numerator, left_side_clone.denominator);
+      return temp;
+   
+   }
+}
+
+Fraction operator/(const Fraction& left, 
+                     const Fraction& right) // INCOMPLETE
+{
+   Fraction left_side_clone;
+   Fraction right_side_clone;
+
+   if(left.get_numerator && right.get_numerator)
+   {
+       right_side_clone.denominator = right.denominator * left.denominator;
+       right_side_clone.numerator = left.denominator * right.numerator;
+
+       left_side_clone.denominator = right.denominator * left.denominator;
+       left_side_clone.numerator = right.denominator * left.numerator;
+
+      Fraction temp(left_side_clone.numerator + right_side_clone.numerator, left_side_clone.denominator);
+      return temp;
+   
+   }
+}
+
+
+
+Fraction operator-(const Fraction& left, 
+                     const Fraction& right)
+{
+   Fraction left_side_clone;
+   Fraction right_side_clone;
+
+   if(left.get_numerator && right.get_numerator)
+   {
+       right_side_clone.denominator = right.denominator * left.denominator;
+       right_side_clone.numerator = left.denominator * right.numerator;
+
+       left_side_clone.denominator = right.denominator * left.denominator;
+       left_side_clone.numerator = right.denominator * left.numerator;
+
+      Fraction temp(left_side_clone.numerator - right_side_clone.numerator, left_side_clone.denominator);
+      return temp;
+   
+   }
+}
+/*
+Fraction Fraction::add_fractions(left_num, left_den, right_num, right_den)
+{
+   Fraction left_side_clone;
+   Fraction right_side_clone;
+
+   right_side_clone.denominator = right.denominator * left.denominator;
+   right_side_clone.numerator = left.denominator * right.numerator;
+
+   left_side_clone.denominator = right.denominator * left.denominator;
+   left_side_clone.numerator = right.denominator * left.numerator;
+
+   Fraction temp(left_side_clone.numerator + right_side_clone.numerator, left_side_clone.denominator);
+
+      
+   return temp;
+}
+*/
+
+
+Fraction Fraction::operator++()
+{
+   Fraction temp(denominator, denominator);
+   operator+(temp, left);
+   return temp + left;
+
+}
+
+Fraction Fraction::operator++(int val)
+{
+   Fraction temp(val, denominator);
+   return temp + left;
+}
+
+Fraction Fraction::operator--()
+{
+   Fraction temp(denominator, denominator);
+   return temp - left;
+
+}
+
+Fraction Fraction::operator--(int val)
+{
+   Fraction temp(val, denominator);
+   return temp - left;
+}
+
+Fraction Fraction::operator+=(const Fraction& right)
+{
+   *this = *this + right;
+
+   // or:
+   //feet += right.feet;
+   //inches += right.inches;
+   //simplify();
+
+   return *this;
+}
+
 
 void BasicTest();
 void RelationTest();
@@ -58,7 +356,7 @@ int main()
     MathAssignTest();
     */
 
-   	Fraction f1;
+   Fraction f1;
 
 	cout << f1;
 }
