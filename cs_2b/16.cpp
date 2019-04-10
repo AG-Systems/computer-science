@@ -151,10 +151,11 @@ void Fraction::set_denominator(int den)
 
 Fraction add_fractions(int left_num, int left_den, int right_num, int right_den)
 {
-   int const old_left_num = left_num;
 
    left_num = left_num * right_den;
-   right_num = right_num * old_left_num;
+   right_num = right_num * left_den;
+
+   // cout << left_num << " + " << right_num << "\n" << (left_den * right_den);
 
    Fraction temp((left_num + right_num), (left_den * right_den));
 
@@ -164,10 +165,9 @@ Fraction add_fractions(int left_num, int left_den, int right_num, int right_den)
 
 Fraction minus_fractions(int left_num, int left_den, int right_num, int right_den)
 {
-   int const old_left_num = left_num;
 
    left_num = left_num * right_den;
-   right_num = right_num * old_left_num;
+   right_num = right_num * left_den;
 
    Fraction temp((left_num - right_num), (left_den * right_den));
 
@@ -184,8 +184,7 @@ Fraction multiply_fractions(int left_num, int left_den, int right_num, int right
 
 Fraction divide_fractions(int left_num, int left_den, int right_num, int right_den)
 {
-   Fraction temp( (left_num * right_den), (right_den * left_num) );     
-   return temp;
+   return multiply_fractions(left_num, left_den, right_den, right_num);
 }
 
 ostream& operator<<(ostream& out, const Fraction& right)
@@ -348,13 +347,13 @@ Fraction operator+(const Fraction& left,
 Fraction operator+(int left, 
                      const Fraction& right)
 {
-    return add_fractions((left * right.denominator), right.denominator, right.numerator, right.denominator);
+    return add_fractions(left, 1, right.numerator, right.denominator); 
 }
 
 Fraction operator+(const Fraction& left, 
                      int right)
 {
-    return add_fractions(left.numerator, left.denominator, (left.numerator * right), left.denominator);
+    return add_fractions(left.numerator, left.denominator, right, 1);
 }
 
 
