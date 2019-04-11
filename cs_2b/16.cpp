@@ -195,24 +195,24 @@ ostream& operator<<(ostream& out, const Fraction& right)
 
 bool operator<(const Fraction& left, const Fraction& right)
 {
-   int left_side = right.numerator * left.denominator;
-   int right_side = left.numerator * right.denominator;
-
+   int right_side = left.denominator * right.numerator;
+   int left_side = left.numerator * right.denominator;
+   
    return left_side < right_side;
 }
 
 bool operator<(int left, const Fraction& right)
-{
-   int left_side = right.numerator * 1;
-   int right_side = left * right.denominator;
+{   
+   int left_side = left * right.denominator;
+   int right_side = 1 * right.numerator;
 
    return left_side < right_side; 
 }
 
 bool operator<(const Fraction& left, int right)
 {
-   int left_side = right * left.denominator;
-   int right_side = left.denominator * 1;
+   int left_side = left.numerator * 1;
+   int right_side = left.denominator * right;
 
    return left_side < right_side; 
 }
@@ -220,120 +220,120 @@ bool operator<(const Fraction& left, int right)
 
 bool operator<=(const Fraction& left, const Fraction& right)
 {
-   int left_side = right.numerator * left.denominator;
-   int right_side = left.numerator * right.denominator;
+   int right_side = left.denominator * right.numerator;
+   int left_side = left.numerator * right.denominator;
 
    return left_side <= right_side;
 }
 
 bool operator<=(int left, const Fraction& right)
 {
-   int left_side = right.numerator * 1;
-   int right_side = left * right.denominator;
+   int left_side = left * right.denominator;
+   int right_side = 1 * right.numerator;
 
    return left_side <= right_side; 
 }
 
 bool operator<=(const Fraction& left, int right)
 {
-   int left_side = right * left.denominator;
-   int right_side = left.denominator * 1;
+   int left_side = left.numerator * 1;
+   int right_side = left.denominator * right;
 
    return left_side <= right_side; 
 }
 
 bool operator>(const Fraction& left, const Fraction& right)
 {
-   int left_side = right.numerator * left.denominator;
-   int right_side = left.numerator * right.denominator;
+   int right_side = left.denominator * right.numerator;
+   int left_side = left.numerator * right.denominator;
 
    return left_side > right_side;
 }
 
 bool operator>(int left, const Fraction& right)
 {
-   int left_side = right.numerator * 1;
-   int right_side = left * right.denominator;
+   int left_side = left * right.denominator;
+   int right_side = 1 * right.numerator;
 
    return left_side > right_side; 
 }
 
 bool operator>(const Fraction& left, int right)
 {
-   int left_side = right * left.denominator;
-   int right_side = left.denominator * 1;
+   int left_side = left.numerator * 1;
+   int right_side = left.denominator * right;
 
    return left_side > right_side; 
 }
 
 bool operator>=(const Fraction& left, const Fraction& right)
 {
-   int left_side = right.numerator * left.denominator;
-   int right_side = left.numerator * right.denominator;
+   int right_side = left.denominator * right.numerator;
+   int left_side = left.numerator * right.denominator;
 
    return left_side >= right_side;
 }
 
 bool operator>=(int left, const Fraction& right)
 {
-   int left_side = right.numerator * 1;
-   int right_side = left * right.denominator;
+   int left_side = left * right.denominator;
+   int right_side = 1 * right.numerator;
 
    return left_side >= right_side; 
 }
 
 bool operator>=(const Fraction& left, int right)
 {
-   int left_side = right * left.denominator;
-   int right_side = left.denominator * 1;
+   int left_side = left.numerator * 1;
+   int right_side = left.denominator * right;
 
    return left_side >= right_side; 
 }
 
 bool operator==(const Fraction& left, const Fraction& right)
 {
-   int left_side = right.numerator * left.denominator;
-   int right_side = left.numerator * right.denominator;
+   int right_side = left.denominator * right.numerator;
+   int left_side = left.numerator * right.denominator;
 
    return left_side == right_side;
 }
 
 bool operator==(int left, const Fraction& right)
 {
-   int left_side = right.numerator * 1;
-   int right_side = left * right.denominator;
+   int left_side = left * right.denominator;
+   int right_side = 1 * right.numerator;
 
    return left_side == right_side; 
 }
 
 bool operator==(const Fraction& left, int right)
 {
-   int left_side = right * left.denominator;
-   int right_side = left.denominator * 1;
+   int left_side = left.numerator * 1;
+   int right_side = left.denominator * right;
 
    return left_side == right_side; 
 }
 
 bool operator!=(const Fraction& left, const Fraction& right)
 {
-   int left_side = right.numerator * left.denominator;
-   int right_side = left.numerator * right.denominator;
+   int right_side = left.denominator * right.numerator;
+   int left_side = left.numerator * right.denominator;
 
    return left_side != right_side;
 }
 
 bool operator!=(int left, const Fraction& right)
 {
-   int left_side = right.numerator * 1;
-   int right_side = left * right.denominator;
+   int left_side = left * right.denominator;
+   int right_side = 1 * right.numerator;
 
    return left_side != right_side; 
 }
 
 bool operator!=(const Fraction& left, int right)
 {
-   int left_side = right * left.denominator;
-   int right_side = left.denominator * 1;
+   int left_side = left.numerator * 1;
+   int right_side = left.denominator * right;
 
    return left_side != right_side; 
 }
@@ -417,28 +417,28 @@ Fraction operator/(const Fraction& left,
 
 Fraction Fraction::operator++()
 {
-   return add_fractions(numerator, denominator, denominator, denominator);
+   return add_fractions(numerator, denominator, 1, 1);
 }
 
 Fraction Fraction::operator++(int val)
 {
-    return add_fractions(numerator, denominator, ( denominator * val), denominator);
+    return add_fractions(numerator, denominator, val, 1);
 }
 
 
 Fraction Fraction::operator--()
 {
-    return minus_fractions(numerator, denominator, denominator, denominator);
+    return minus_fractions(numerator, denominator, 1, 1);
 }
 
 Fraction Fraction::operator--(int val)
 {
-    return minus_fractions(numerator, denominator, ( denominator * val), denominator);
+    return minus_fractions(numerator, denominator, val, 1);
 }
 
 Fraction Fraction::operator+=(const Fraction& right)
 {
-   *this = *this + right;
+   *this = add_fractions(numerator, denominator, right.numerator, right.denominator);
 
 
    return *this;
@@ -446,12 +446,12 @@ Fraction Fraction::operator+=(const Fraction& right)
 
 Fraction Fraction::operator+=(int val)
 {
-    return add_fractions(numerator, denominator, ( denominator * val), denominator);
+    return add_fractions(numerator, denominator, val, 1);
 }
 
 Fraction Fraction::operator-=(const Fraction& right)
 {
-   *this = *this + right;
+   *this = minus_fractions(numerator, denominator, right.numerator, right.denominator);
 
 
    return *this;
@@ -459,12 +459,12 @@ Fraction Fraction::operator-=(const Fraction& right)
 
 Fraction Fraction::operator-=(int val)
 {
-    return minus_fractions(numerator, denominator, ( denominator * val), denominator);
+    return minus_fractions(numerator, denominator, val, 1);
 }
 
 Fraction Fraction::operator*=(const Fraction& right)
 {
-   *this = *this + right;
+   *this = multiply_fractions(numerator, denominator, right.numerator, right.denominator);
 
 
    return *this;
@@ -472,12 +472,12 @@ Fraction Fraction::operator*=(const Fraction& right)
 
 Fraction Fraction::operator*=(int val)
 {
-    return multiply_fractions(numerator, denominator, ( denominator * val), denominator);
+    return multiply_fractions(numerator, denominator, val, 1);
 }
 
 Fraction Fraction::operator/=(const Fraction& right)
 {
-   *this = *this + right;
+   *this = divide_fractions(numerator, denominator, right.numerator, right.denominator);
 
 
    return *this;
@@ -485,7 +485,7 @@ Fraction Fraction::operator/=(const Fraction& right)
 
 Fraction Fraction::operator/=(int val)
 {
-    return divide_fractions(numerator, denominator, ( denominator * val), denominator);
+    return divide_fractions(numerator, denominator, val, 1);
 }
 
 void BasicTest();
@@ -501,9 +501,6 @@ int main()
     BinaryMathTest();
     MathAssignTest();
 
-   Fraction f1;
-
-   cout << f1;
 }
 
 
