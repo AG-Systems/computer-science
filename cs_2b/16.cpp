@@ -3,12 +3,25 @@
 #include <cassert>
 #include <string>
 
+/*
+Name: Max Chakhmatov
+Date: April 10 2019
+Instructor:  Dave Harden
+Name of file: a1_1.cpp
+Description:  This program can create fractions and evaluate them first hand by using any basic programming arithmetic.
+
+Input: The input is by creating any Fraction object by typing Fraction name_of_object. 
+If you do not use any parameters, it will default to a 0 / 1 fraction. If you put only one parameter, it will be num / 1 
+fraction. Lastly if you input 2, it will be num1 / num2.
+
+Output: Test cases of the fraction class and the following functions of the arthmetic. 
+
+
+
+*/
 
 using namespace std;
 
-/* [INSERT YOUR CODE HERE, FIRST YOUR CLASS DECLARATION, FOLLOWED BY YOUR CLASS
-MEMBER FUNCTION DEFINITIONS!]
-*/
 
 class Fraction
 { 
@@ -18,7 +31,6 @@ class Fraction
         int get_denominator();
         void set_numerator(int num = 0);
         void set_denominator(int den = 1);
-        // Fraction add_fractions(int left_num, int left_den, int right_num, int right_den);
 
         friend bool operator<(const Fraction& left, 
                            const Fraction& right);
@@ -120,6 +132,11 @@ class Fraction
         int numerator, denominator;
 }; 
 
+
+
+
+
+// Constructor of the Fraction class. Gets called after the object gets created.
 Fraction::Fraction(int num, int den)
 {
     assert(den != 0);
@@ -129,33 +146,59 @@ Fraction::Fraction(int num, int den)
 }
 
 
+
+
+
+// Returns the numerator of the object if user prefers to use functions over private data members.
 int Fraction::get_numerator()
 {
     return numerator;
 }
 
+
+
+
+
+// Returns the denominator of the object if user prefers to use functions over private data members.
 int Fraction::get_denominator()
 {
     return denominator;
 }
 
+
+
+// Sets the numerator of the object
+// Parameter num: The value that you pass through to set the numerator of the object.
 void Fraction::set_numerator(int num)
 {
     numerator = num;
 }
 
+
+
+
+// Sets the denominator of the object
+// Parameter den: The value that you pass through to set the denominator of the object
 void Fraction::set_denominator(int den)
 {
     denominator = den;
 }
 
+
+
+// Computes the addition of 2 different fractions and returns a fraction object.
+// Works with whole numbers as well.
+// All inputs must be integers and returns an object. 
+
+// Parameter left_num: First object's numerator that gets passed through
+// Parameter left_den: First object's denominator
+// Paremter right_num: Second object's numerator
+// Parameter: right_den: Second object's denonimator
 Fraction add_fractions(int left_num, int left_den, int right_num, int right_den)
 {
 
    left_num = left_num * right_den;
    right_num = right_num * left_den;
-
-   // cout << left_num << " + " << right_num << "\n" << (left_den * right_den);
 
    Fraction temp((left_num + right_num), (left_den * right_den));
 
@@ -163,6 +206,18 @@ Fraction add_fractions(int left_num, int left_den, int right_num, int right_den)
    return temp;
 }
 
+
+
+
+
+// Computes the difference of 2 different fractions and returns a fraction object.
+// Works with whole numbers as well.
+// All inputs must be integers and returns an object. 
+
+// Parameter left_num: First object's numerator that gets passed through
+// Parameter left_den: First object's denominator
+// Paremter right_num: Second object's numerator
+// Parameter: right_den: Second object's denonimator
 Fraction minus_fractions(int left_num, int left_den, int right_num, int right_den)
 {
 
@@ -175,6 +230,18 @@ Fraction minus_fractions(int left_num, int left_den, int right_num, int right_de
    return temp;
 }
 
+
+
+
+
+// Computes the product of 2 different fractions and returns a fraction object.
+// Works with whole numbers as well.
+// All inputs must be integers and returns an object. 
+
+// Parameter left_num: First object's numerator that gets passed through
+// Parameter left_den: First object's denominator
+// Paremter right_num: Second object's numerator
+// Parameter: right_den: Second object's denonimator
 Fraction multiply_fractions(int left_num, int left_den, int right_num, int right_den)
 {
 
@@ -182,17 +249,42 @@ Fraction multiply_fractions(int left_num, int left_den, int right_num, int right
    return temp;
 }
 
+
+
+
+// Computes the division of 2 different fractions and returns a fraction object.
+// Works with whole numbers as well.
+// All inputs must be integers and returns an object. 
+
+// Parameter left_num: First object's numerator that gets passed through
+// Parameter left_den: First object's denominator
+// Paremter right_num: Second object's numerator
+// Parameter: right_den: Second object's denonimator
 Fraction divide_fractions(int left_num, int left_den, int right_num, int right_den)
 {
    return multiply_fractions(left_num, left_den, right_den, right_num);
 }
 
+
+
+// Enables the user to place the object in front of a ostream function and print it cleanly
+// Input must be an object
+
+// Parameter right: The object that is the right side of the << 
 ostream& operator<<(ostream& out, const Fraction& right)
 {   
-    out << right.numerator << "|" << right.denominator; 
+    out << right.numerator << "\\" << right.denominator; 
     return out;
 }
 
+
+
+
+// Less then operator that computes each "side" of the fraction...
+// ...to determine which side is bigger that is fully accurate
+
+// Parameter left: Left hand side of the operator fraction object
+// Parameter right: Right hand side of the operator fraction object
 bool operator<(const Fraction& left, const Fraction& right)
 {
    int right_side = left.denominator * right.numerator;
@@ -201,6 +293,14 @@ bool operator<(const Fraction& left, const Fraction& right)
    return left_side < right_side;
 }
 
+
+
+
+// Less then operator that computes each "side" of the fraction...
+// ...to determine which side is bigger that is fully accurate
+
+// Parameter left: Left hand side of the operator that is a integer 
+// Parameter right: Right hand side of the operator fraction object
 bool operator<(int left, const Fraction& right)
 {   
    int left_side = left * right.denominator;
@@ -209,6 +309,14 @@ bool operator<(int left, const Fraction& right)
    return left_side < right_side; 
 }
 
+
+
+
+// Less then operator that computes each "side" of the fraction...
+// ...to determine which side is bigger that is fully accurate
+
+// Parameter left: Left hand side of the operator that is fraction object
+// Parameter right: Right hand side of the operator that is a integer 
 bool operator<(const Fraction& left, int right)
 {
    int left_side = left.numerator * 1;
@@ -218,6 +326,15 @@ bool operator<(const Fraction& left, int right)
 }
 
 
+
+
+
+
+// Less then or equal to operator that computes each "side" of the fraction...
+// ...to determine which side is bigger that is fully accurate
+
+// Parameter left: Left hand side of the operator fraction object
+// Parameter right: Right hand side of the operator fraction object
 bool operator<=(const Fraction& left, const Fraction& right)
 {
    int right_side = left.denominator * right.numerator;
@@ -226,6 +343,13 @@ bool operator<=(const Fraction& left, const Fraction& right)
    return left_side <= right_side;
 }
 
+
+
+// Less then or equal to operator that computes each "side" of the fraction...
+// ...to determine which side is bigger that is fully accurate
+
+// Parameter left: Left hand side of the operator that is a integer 
+// Parameter right: Right hand side of the operator fraction object
 bool operator<=(int left, const Fraction& right)
 {
    int left_side = left * right.denominator;
@@ -234,6 +358,15 @@ bool operator<=(int left, const Fraction& right)
    return left_side <= right_side; 
 }
 
+
+
+
+
+// Less then or equal to operator that computes each "side" of the fraction...
+// ...to determine which side is bigger that is fully accurate
+
+// Parameter left: Left hand side of the operator that is fraction object
+// Parameter right: Right hand side of the operator that is a integer 
 bool operator<=(const Fraction& left, int right)
 {
    int left_side = left.numerator * 1;
@@ -452,7 +585,6 @@ Fraction Fraction::operator+=(int val)
 Fraction Fraction::operator-=(const Fraction& right)
 {
    *this = minus_fractions(numerator, denominator, right.numerator, right.denominator);
-
 
    return *this;
 }
