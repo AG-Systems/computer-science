@@ -6,7 +6,7 @@
 #include "fraction.h"
 
 namespace cs_fraction {
-    
+
    void Fraction::simplify()
    {
       if(numerator > denominator)
@@ -20,8 +20,6 @@ namespace cs_fraction {
 
    void Fraction::simplify_helper(int base)
    {
-
-   
       if(base <= 1)
       {
          if(denominator < 0)
@@ -238,20 +236,18 @@ namespace cs_fraction {
 
    istream& operator>>(istream& in, Fraction& right)
    {
-      cout << "testing..." << endl;
-      int temp;
-      in >> temp;
-      cout << "\n";
-      cout << "=======" << "\n";
-      cout << in.peek() << "\n";
-      cout << "=======" << "\n";
-      if (in.peek() == '+'){
-         // 
-      } else if (in.peek() == '/'){
-         // 
-      } else {
-         // 
-      }   
+      while(!in.eof())
+      {
+        if (in.peek() == 43){ // + symbol
+            // 
+            cout << "it wokred!" << endl;
+        } else if (in.peek() == 47){ /*   / symbol  */
+            // 
+        } else {
+            // 
+        }
+        in.ignore();  
+      }
       return in;
    }
 
