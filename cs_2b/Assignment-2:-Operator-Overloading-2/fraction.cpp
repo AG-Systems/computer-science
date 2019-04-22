@@ -42,6 +42,11 @@ namespace cs_fraction {
       }
    }
 
+   void Fraction::simplify_fraction()
+   {
+      return simplify();
+   }
+
    // Constructor of the Fraction class. Gets called after the object gets created.
    Fraction::Fraction(int num, int den)
    {
@@ -236,19 +241,43 @@ namespace cs_fraction {
 
    istream& operator>>(istream& in, Fraction& right)
    {
-      while(!in.eof())
-      {
-        if (in.peek() == 43){ // + symbol
-            // 
-            cout << "it wokred!" << endl;
-        } else if (in.peek() == 47){ /*   / symbol  */
-            // 
-        } else {
-            // 
-        }
-        in.ignore();  
-      }
-      return in;
+        int intial_num;
+        in >> intial_num;
+        if (in.peek() == 43) // PLUS symbol
+        { 
+            in.ignore();
+            int numerator;
+            in >> numerator;
+
+            in.ignore();
+            int denominator;
+            in >> denominator;
+            if(intial_num > 0)
+            {
+               right.numerator = (denominator * intial_num) + numerator;
+            } else if(intial_num == 0) {
+               right.numerator = numerator;
+            } else {
+               int temp = (abs(denominator) * abs(intial_num)) + abs(numerator);
+               temp = temp * -1;
+               right.numerator = temp;
+            }
+
+            right.denominator = denominator;
+         } else if (in.peek() == 47) {   //   SLASH symbol 
+            right.numerator = intial_num;
+            in.ignore();
+            int denominator;
+            in >> denominator;
+            right.denominator = denominator;
+
+         } else {
+            right.numerator = intial_num;
+         }
+
+        right.simplify_fraction();
+        /* cout << right.numerator << "/" << right.denominator << endl; */
+        return in;
    }
 
 
