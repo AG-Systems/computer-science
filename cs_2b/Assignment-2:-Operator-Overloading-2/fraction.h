@@ -1,5 +1,7 @@
-#ifndef CS_FRACTION_H
-#define CS_FRACTION_H
+#ifndef FRACTION_H
+#define FRACTION_H
+
+
 #include <iostream>
 #include <string>
 #include <cassert>
@@ -17,7 +19,9 @@ namespace cs_fraction {
          // Constructor function
          // Gets called after the object gets created
          Fraction(int num = 0, int den = 1);
-
+         
+         void simplify_fraction();
+         
          // Function that returns the numerator value of the object
          int get_numerator();
 
