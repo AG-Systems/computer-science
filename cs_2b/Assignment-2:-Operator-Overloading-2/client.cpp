@@ -4,6 +4,7 @@
 #include <string>
 #include <cmath> 
 #include "fraction.h"
+
 using namespace std;
 using namespace cs_fraction;
 
@@ -35,14 +36,17 @@ string boolString(bool convertMe);
 
 int main()
 { 
+    /*
     Fraction test;
     cin >> test;
-    /*
+    */
+
+    
     BasicTest();
     RelationTest();
     BinaryMathTest();
     MathAssignTest();
-    */
+    
 }
 
 
