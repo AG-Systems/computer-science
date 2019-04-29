@@ -7,6 +7,15 @@
 #include <iostream>
 using namespace std;
 
+/*
+Name: Max Chakhmatov
+Date: April 29 2019
+Instructor:  Dave Harden
+Name of file: a3_1.cpp
+Description:  This program creates pointers and performes operations with addresses and values.
+Output: Prints the operations that the comments explain.
+*/
+
 
 void noNegatives(int *x) 
 {
