@@ -17,6 +17,9 @@ Output: Prints the operations that the comments explain.
 */
 
 
+
+// Changes a variable to 0 if its a negative.
+// Does not touch the addresses
 void noNegatives(int *x) 
 {
     if(*x < 0)
@@ -25,6 +28,8 @@ void noNegatives(int *x)
     }
 }
 
+// Swap function that swaps the values with a temporary variable. 
+// Does not touch the addresses
 void swap(int *x, int *y)
 {
     int temp = *x;
