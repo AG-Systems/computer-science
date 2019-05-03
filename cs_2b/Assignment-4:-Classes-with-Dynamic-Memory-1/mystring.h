@@ -17,12 +17,13 @@ namespace cs_mystring {
    class MyString
    { 
       public:
-        MyString(char* new_string);  
+        MyString(const char* new_string);  
+        MyString(const MyString& right);  
         MyString();  
         ~MyString();
-
+        
         int length() const;
-
+        
         friend bool operator<(const MyString& left, const MyString& right);
         friend bool operator<(const MyString& left, const char * right);
         friend bool operator<(const char * left, const MyString& right);
@@ -50,11 +51,15 @@ namespace cs_mystring {
         friend std::ostream& operator<<(std::ostream& out, 
                             const MyString& right);
 
-        char& operator[](int i);
-        char operator[](unsigned int i) const;
+        char& operator[](size_t i);
+        const char& operator[](size_t i) const;
+
+        MyString& operator=(const MyString& right);
+        MyString& operator=(const char * right);
              
       private:
-        char* string = new char;
+        void assignment(const char* ptr);
+        char* string;
    }; 
 
 }
