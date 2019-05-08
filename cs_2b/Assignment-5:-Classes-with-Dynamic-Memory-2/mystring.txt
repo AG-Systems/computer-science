@@ -1,0 +1,14 @@
+# This file has some strings that are used in the string test to check
+# reading strings from files. The default overloaded >> of your string 
+# class should skip over any leading spaces and read characters into
+# the string object, stopping at the first whitespace character (this is
+# similar to the behavior of >> on char *).  The read method of the
+# string class is a little fancier. It allows client to restrict
+# how many characters at max to read and what character to use as 
+# delimiter, so you can stop at newline instead of space, for example.
+# Reading consumes the delimiting character, so the next read starts 
+# after that.
+#
+The  first  time  we  will
+    read individual words, next    
+we read whole lines
