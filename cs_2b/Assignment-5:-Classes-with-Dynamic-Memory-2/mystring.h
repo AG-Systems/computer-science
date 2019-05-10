@@ -59,14 +59,14 @@ namespace cs_mystring {
         MyString& operator=(const MyString& right);
         MyString& operator=(const char * right);
 
-        friend MyString& operator+(const MyString& left, const MyString& right);
-        friend MyString& operator+(const MyString& left, const char * right);
-        friend MyString& operator+(const char * left, const MyString& right);
+        friend MyString operator+(const MyString& left, const MyString& right);
+        friend MyString operator+(const MyString& left, const char * right);
+        friend MyString operator+(const char * left, const MyString& right);
 
         MyString& operator+=(const MyString& right);
         MyString& operator+=(const char * right);
 
-        void read(std::ifstream& infile, const char right);
+        void read(std::istream& infile, const char right);
         
         static const int MAX_INPUT_SIZE = 127;
 
