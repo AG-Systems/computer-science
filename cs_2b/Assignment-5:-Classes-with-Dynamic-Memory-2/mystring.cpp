@@ -157,33 +157,33 @@ namespace cs_mystring {
         return (strcmp(left, right.string) != 0);
     }
 
-    MyString& operator+(const MyString& left, const MyString& right)
+    MyString operator+(const MyString& left, const MyString& right)
     {
         MyString result;
         delete [] result.string;
-        size_t string_length = strlen(left.string);
+        size_t string_length = strlen(left.string) + strlen(right.string);
         result.string = new char[string_length + 1];
         strcpy(result.string, left.string);
         strcat(result.string, right.string);
         return result;
     }
 
-    MyString& operator+(const MyString& left, const char * right)
+    MyString operator+(const MyString& left, const char * right)
     {
         MyString result;
         delete [] result.string;
-        size_t string_length = strlen(left.string);
+        size_t string_length = strlen(left.string) + strlen(right);
         result.string = new char[string_length + 1];
         strcpy(result.string, left.string);
         strcat(result.string, right);
         return result;
     }
 
-    MyString& operator+(const char * left, const MyString& right)
+    MyString operator+(const char * left, const MyString& right)
     {
         MyString result;
         delete [] result.string;
-        size_t string_length = strlen(left);
+        size_t string_length = strlen(left) + strlen(right.string);
         result.string = new char[string_length + 1];
         strcpy(result.string, left);
         strcat(result.string, right.string);
@@ -214,27 +214,26 @@ namespace cs_mystring {
         while (isspace(in.peek())){
             in.ignore();
         }
-
         char temp[MyString::MAX_INPUT_SIZE + 1];
-        in.getline(temp, MyString::MAX_INPUT_SIZE, '\0');
+        in.getline(temp, MyString::MAX_INPUT_SIZE);
         delete [] right.string;
         right.string = new char[strlen(temp) + 1];
         strcpy(right.string, temp);
         in >> right.string;
         return in;
-        /*
-       char foo [128];
-       in >> foo;
-       in.ignore();
-       right.string = 
-       strcpy(right.string, foo);
-       return in;
-        */
+
        
    } 
 
-   void MyString::read(std::ifstream& infile, const char right)
+   void MyString::read(std::istream& infile, const char right)
    {
+        
+        char temp[MyString::MAX_INPUT_SIZE + 1];
+        infile.getline(temp, MyString::MAX_INPUT_SIZE, right);
+        char * str = new char[strlen(temp)];
+        strcpy(str, temp);
+        
+        infile >> str;       
 
    }
 
