@@ -44,9 +44,9 @@ string boolString(bool convertMe);
 int main()
 {
     BasicTest();
-    RelationTest();
-    ConcatTest();
-    CopyTest();
+    //RelationTest();
+    //ConcatTest();
+    //CopyTest();
 }
 
 
@@ -75,12 +75,13 @@ void BasicTest()
     }
 
 
-
+    
     cout << endl << "----- Now reading MyStrings from file" << endl;
     
     cout << endl << "----- first, word by word" << endl;
     ifstream in("mystring.txt");
     assert(in);
+    
     while (in.peek() == '#'){
         in.ignore(128, '\n');
     }
@@ -90,9 +91,9 @@ void BasicTest()
         in >> s;
     }
     in.close();
-
     
-   
+    
+    
     cout << endl << "----- now, line by line" << endl;
     ifstream in2("mystring.txt");
     assert(in2);
@@ -105,7 +106,8 @@ void BasicTest()
         s.read(in2, '\n');
     }
     in2.close();
-
+    
+    
 
 
 
