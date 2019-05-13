@@ -44,9 +44,9 @@ string boolString(bool convertMe);
 int main()
 {
     BasicTest();
-    //RelationTest();
-    //ConcatTest();
-    //CopyTest();
+    RelationTest();
+    ConcatTest();
+    CopyTest();
 }
 
 
