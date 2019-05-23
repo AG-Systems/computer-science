@@ -1,18 +1,20 @@
-#ifndef HUMAN_H
-#define HUMAN_H
+#ifndef DEMON_H
+#define DEMON_H
 
 #include "creature.h"
 #include <string>
 
 using namespace std;
 
-class Human : public Creature {
+class Demon : public Creature {
     public:
-        Human();
-        Human(string s);   
+        Demon();
+        Demon(string s);   
 
         int getDamage() const;     
         string getSpecies() const;
+        
+         
 
 };
 
