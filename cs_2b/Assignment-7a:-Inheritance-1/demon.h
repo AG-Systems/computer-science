@@ -4,14 +4,26 @@
 #include "creature.h"
 #include <string>
 
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 class Demon : public Creature {
     public:
-        Demon();
-        Demon(string s);   
+        Demon()
+        {
+            Creature::setStrength(10);
+            Creature::setHitpoints(10); 
+        };
 
-        int getDamage() const;     
+        Demon(int new_strength, int new_hitpoints)
+        {
+            Creature::setStrength(new_strength);
+            Creature::setHitpoints(new_hitpoints);  
+        };  
+
+        int getDamage();     
         string getSpecies() const;
         
          

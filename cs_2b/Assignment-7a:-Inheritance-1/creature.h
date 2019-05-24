@@ -5,6 +5,9 @@
 #include <iostream>
 #include <string>
 
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 // namespace cs_mystring {
@@ -15,8 +18,17 @@ using namespace std;
         int strength;           // how much damage this Creature inflicts
         int hitpoints;          // how much damage this Creature can sustain          
       public:
-        Creature();
-        Creature(int newStrength, int newHitpoints);
+        Creature()
+        {
+            Creature::setStrength(10);
+            Creature::setHitpoints(10); 
+        };
+
+        Creature(int new_strength, int new_hitpoints)
+        {
+            Creature::setStrength(new_strength);
+            Creature::setHitpoints(new_hitpoints);  
+        }; 
 
         int getDamage(); 
         string getSpecies();

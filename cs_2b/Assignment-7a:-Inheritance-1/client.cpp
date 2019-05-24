@@ -7,7 +7,8 @@
 #include "balrog.h"
 #include "elf.h"
 #include "demon.h"
-
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 

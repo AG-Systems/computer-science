@@ -8,10 +8,19 @@ using namespace std;
 
 class Human : public Creature {
     public:
-        Human();
-        Human(string s);   
+        Human()
+        {
+            Creature::setStrength(10);
+            Creature::setHitpoints(10);  
+        };
 
-        int getDamage() const;     
+        Human(int new_strength, int new_hitpoints)
+        {
+            Creature::setStrength(new_strength);
+            Creature::setHitpoints(new_hitpoints);  
+        };   
+
+        int getDamage();     
         string getSpecies() const;
 
 };

@@ -2,11 +2,14 @@
 #include <iostream>
 #include <string>
 
+#include <cstdlib>
+#include <ctime>
+
 string Elf::getSpecies() const {
     return "Elf";
 }
 
-int Elf::getDamage() const {
+int Elf::getDamage(){
     int base_damage = Creature::getDamage();
     cout << getSpecies() << " attacks for " << base_damage << " points!" << endl;
     if ((rand() % 2) == 0) {

@@ -1,5 +1,6 @@
 #include "creature.h"
-
+#include <cstdlib>
+#include <ctime>
 
 string Creature::getSpecies(){
     return "Creature";
