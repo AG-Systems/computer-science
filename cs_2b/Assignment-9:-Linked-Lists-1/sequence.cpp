@@ -9,6 +9,7 @@ namespace cs_sequence {
         head_ptr = nullptr;
         cursor = nullptr;
         tail_ptr = nullptr;
+        precursor = nullptr;
         num_items = 0;
     }
 
@@ -49,21 +50,33 @@ namespace cs_sequence {
     }
 
     bool Sequence::is_item() const {
-
+        return cursor != nullptr;            
     }
 
     int Sequence::current() const {
-
+        if(is_item())
+        {
+            return cursor->data;
+        }
     }
 
     void Sequence::start() 
     {
-        
+        if(head_ptr != nullptr)
+        {
+            cursor = head_ptr;
+            precursor = nullptr;
+        }
     } 
 
     void Sequence::advance() 
     {
-        
+        if(is_item())
+        {
+            precursor = cursor;
+            cursor = cursor->next;        
+        }
+
     } 
 
 }

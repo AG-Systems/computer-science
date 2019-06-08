@@ -26,10 +26,10 @@ namespace cs_sequence {
 
        private:
         struct node {
-            value_type data;
+            size_type data;
             node* next;
         };
-        int num_items;
+        int num_items; // stores the number of items in the Sequence.
         node* head_ptr;
         node* tail_ptr;
         node* cursor;
