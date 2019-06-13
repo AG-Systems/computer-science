@@ -13,9 +13,49 @@ namespace cs_sequence {
         num_items = 0;
     }
 
+    Sequence::~Sequence()
+    {
+        clear();
+    }
+
+    Sequence::Sequence(Sequence &node)
+    {
+        copy(node);
+    }
+
+    Sequence& Sequence::operator=(Sequence &copied_linked_list)
+    {
+        copy(copied_linked_list);
+    }
+
     Sequence::Sequence(int val)
     {
 
+    }
+
+    void Sequence::copy(Sequence &node) // Still needs to be completed
+    {
+        head_ptr = nullptr;
+        cursor = nullptr;
+        tail_ptr = nullptr;
+        precursor = nullptr;
+        num_items = 0;
+
+        while(node.advance() != nullptr)
+        {
+            insert(node);
+            node.advance();
+        }
+                    
+    }
+
+    void Sequence::clear()
+    {
+        delete cursor;
+        delete head_ptr;
+        delete tail_ptr;
+        delete precursor;
+        num_items = 0;
     }
 
 
@@ -48,8 +88,12 @@ namespace cs_sequence {
         {
             num_items++;
             node* temp = cursor->next;
-            cursor->next = entry;
-            entry->next = temp->next;
+
+            node* new_node = new node;
+            new_node->data = entry;
+
+            cursor->next = new_node;
+            new_node->next = temp;
             
         } else {
             insert(entry);
@@ -61,6 +105,7 @@ namespace cs_sequence {
     {
         if(is_item())
         {
+            num_items--;
             if(cursor->next == nullptr)
             {
                 delete cursor;

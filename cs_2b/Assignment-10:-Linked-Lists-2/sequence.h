@@ -16,8 +16,9 @@ namespace cs_sequence {
       public:
         Sequence();
         ~Sequence();
-
-        Sequence(const Sequence &node);
+        Sequence(Sequence &node);
+        Sequence& operator=(Sequence& copied_linked_list);
+        
         Sequence(int val);
 
         void start();
@@ -39,7 +40,7 @@ namespace cs_sequence {
         node* tail_ptr;
         node* cursor;
         node* precursor;
-        void copy();
+        void copy(Sequence &node);
         void clear();
 
 
