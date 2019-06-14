@@ -11,7 +11,7 @@
 
 #include <iostream>     // Provides cout.
 #include <cstdlib>      // Provides size_t.
-#include "Sequence.h"  // Provides the Sequence class with double items.
+#include "sequence.h"  // Provides the Sequence class with double items.
 using namespace std;
 
 
@@ -218,7 +218,7 @@ int test1()
 	test = empty;
 	test.insert(10);
 	if (!correct(test, 1, 0, items2)) return 0;
-
+	
 	// Test the insert function to add an item at the front of a Sequence
 	cout << "I am now using attach to put 10,20,30 in an empty Sequence.\n";
 	cout << "Then I move the cursor to the start and insert 5." << endl;

@@ -13,41 +13,67 @@ namespace cs_sequence {
         num_items = 0;
     }
 
+
+
     Sequence::~Sequence()
     {
         clear();
     }
 
+
+
+
     Sequence::Sequence(Sequence &node)
     {
-        copy(node);
+        copy(node, true);
     }
+
+
+
 
     Sequence& Sequence::operator=(Sequence &copied_linked_list)
     {
-        copy(copied_linked_list);
+        copy(copied_linked_list, false);
+        return *this;
     }
+
+
+
 
     Sequence::Sequence(int val)
     {
 
     }
 
-    void Sequence::copy(Sequence &node) // Still needs to be completed
-    {
-        head_ptr = nullptr;
-        cursor = nullptr;
-        tail_ptr = nullptr;
-        precursor = nullptr;
-        num_items = 0;
 
-        while(node.advance() != nullptr)
+
+
+    void Sequence::copy(Sequence &node, bool new_list) // Still needs to be completed
+    {
+        if(new_list)
         {
-            insert(node);
-            node.advance();
-        }
-                    
+            head_ptr = nullptr;
+            cursor = nullptr;
+            tail_ptr = nullptr;
+            precursor = nullptr;
+            num_items = 0;
+
+            while(node.is_item())
+            {
+                insert(node.current());
+                node.advance();
+            }
+        } else {
+            while(node.is_item())
+            {
+                attach(node.current());
+                node.advance();
+            }
+        }           
     }
+
+
+
 
     void Sequence::clear()
     {
@@ -57,6 +83,8 @@ namespace cs_sequence {
         delete precursor;
         num_items = 0;
     }
+
+
 
 
     void Sequence::insert(const value_type& entry) {
@@ -79,6 +107,9 @@ namespace cs_sequence {
         cursor = new_node;
     } 
 
+
+
+
     void Sequence::attach(const value_type& entry) 
     {
         // Postcondition: A new copy of entry has been inserted in the Sequence after the current 
@@ -86,17 +117,17 @@ namespace cs_sequence {
         // the Sequence. In either case, the new item is now the current item of the Sequence.
         if(is_item())
         {
-            num_items++;
-            node* temp = cursor->next;
-
             node* new_node = new node;
+            node* temp = cursor->next;
             new_node->data = entry;
-
             cursor->next = new_node;
-            new_node->next = temp;
+            temp->next = new_node;
+            cursor = temp;
+            num_items++;
             
         } else {
-            insert(entry);
+            insert(entry);           
+
         }
     } 
 
@@ -139,6 +170,8 @@ namespace cs_sequence {
         if(is_item())
         {
             return cursor->data;
+        } else {
+           throw; 
         }
     }
 

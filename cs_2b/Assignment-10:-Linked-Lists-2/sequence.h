@@ -24,8 +24,8 @@ namespace cs_sequence {
         void start();
         void advance();
         void insert(const value_type& entry); 
-        void attach(const value_type& entry); // NOT REQUIRED
-        void remove_current(); // NOT REQUIRED
+        void attach(const value_type& entry); 
+        void remove_current();
         size_type size() const;
         bool is_item() const;
         value_type current() const;
@@ -40,7 +40,7 @@ namespace cs_sequence {
         node* tail_ptr;
         node* cursor;
         node* precursor;
-        void copy(Sequence &node);
+        void copy(Sequence &node,  bool new_list);
         void clear();
 
 
