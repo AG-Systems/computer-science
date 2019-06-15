@@ -33,7 +33,7 @@ namespace cs_sequence {
 
     Sequence& Sequence::operator=(Sequence &copied_linked_list)
     {
-        copy(copied_linked_list, false);
+        copy(copied_linked_list, true);
         return *this;
     }
 
@@ -50,26 +50,17 @@ namespace cs_sequence {
 
     void Sequence::copy(Sequence &node, bool new_list) // Still needs to be completed
     {
-        if(new_list)
-        {
-            head_ptr = nullptr;
-            cursor = nullptr;
-            tail_ptr = nullptr;
-            precursor = nullptr;
-            num_items = 0;
+        head_ptr = nullptr;
+        cursor = nullptr;
+        tail_ptr = nullptr;
+        precursor = nullptr;
+        num_items = 0;
 
-            while(node.is_item())
-            {
-                insert(node.current());
-                node.advance();
-            }
-        } else {
-            while(node.is_item())
-            {
-                attach(node.current());
-                node.advance();
-            }
-        }           
+        while(node.is_item())
+        {
+            insert(node.current());
+            node.advance();
+        }          
     }
 
 
@@ -109,13 +100,13 @@ namespace cs_sequence {
 
 
 
-
+    /* 
     void Sequence::attach(const value_type& entry) 
     {
         // Postcondition: A new copy of entry has been inserted in the Sequence after the current 
         // item. If there was no current item, then the new entry has been attached to the end of 
         // the Sequence. In either case, the new item is now the current item of the Sequence.
-        if(is_item())
+        if(is_item() && cursor->next != nullptr)
         {
             node* new_node = new node;
             node* temp = cursor->next;
@@ -126,10 +117,46 @@ namespace cs_sequence {
             num_items++;
             
         } else {
-            insert(entry);           
+            
+            if(is_item())
+            {
+                node* new_node = new node;
+                new_node->data = entry;
+                cursor->next = new_node;
+                cursor = cursor->next;
+                num_items++;
+            } else {
 
+            }
+            
         }
-    } 
+    }
+    */
+    void Sequence::attach(const value_type& entry) {
+        
+        node* new_node = new node;
+        new_node->data = entry;
+        num_items++;
+        
+        if (cursor == tail_ptr || cursor == nullptr) { 
+            if(num_items == 1)
+            {
+                head_ptr = new_node;
+            } else {
+                tail_ptr->next = new_node;
+                
+            }
+            tail_ptr = new_node;
+        } else {  
+            node* temp = cursor->next;
+            precursor = cursor;
+
+            cursor->next = new_node;
+            new_node->next = temp;
+        }
+        
+        cursor = new_node;
+    }  
 
 
     void Sequence::remove_current() 
