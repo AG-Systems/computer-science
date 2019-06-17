@@ -58,7 +58,7 @@ namespace cs_sequence {
 
         while(node.is_item())
         {
-            insert(node.current());
+            attach(node.current());
             node.advance();
         }          
     }
@@ -100,13 +100,24 @@ namespace cs_sequence {
 
 
     void Sequence::attach(const value_type& entry) {
-        advance();
 
-        if(cursor != nullptr && cursor != tail_ptr && num_items > 1 && precursor != nullptr) 
+        node* temp_cursor = new node;
+        node* temp_precursor = new node;
+        temp_cursor = cursor;
+        temp_precursor = precursor;
+        if(is_item())
         {
+            temp_precursor = temp_cursor;
+            temp_cursor = temp_cursor->next;        
+        }
+
+        if(temp_cursor != nullptr && temp_cursor != tail_ptr && num_items > 1 && temp_precursor != nullptr) 
+        {
+            precursor = cursor;
+            cursor = cursor->next;
             insert(entry);
         } else {
-            
+
             node* new_node = new node;
             new_node->data = entry;
             num_items++;
@@ -116,6 +127,7 @@ namespace cs_sequence {
                 cursor->next = new_node;
                 cursor = cursor->next;
                 tail_ptr = new_node;
+                cursor = new_node;
             }
             else if (cursor != nullptr)
             {
@@ -133,6 +145,8 @@ namespace cs_sequence {
             }
             
         }
+        delete temp_cursor;
+        delete temp_precursor;
 
     }  
 
