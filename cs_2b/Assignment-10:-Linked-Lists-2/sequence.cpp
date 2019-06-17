@@ -99,63 +99,41 @@ namespace cs_sequence {
     } 
 
 
+    void Sequence::attach(const value_type& entry) {
+        advance();
 
-    /* 
-    void Sequence::attach(const value_type& entry) 
-    {
-        // Postcondition: A new copy of entry has been inserted in the Sequence after the current 
-        // item. If there was no current item, then the new entry has been attached to the end of 
-        // the Sequence. In either case, the new item is now the current item of the Sequence.
-        if(is_item() && cursor->next != nullptr)
+        if(cursor != nullptr && cursor != tail_ptr && num_items > 1 && precursor != nullptr) 
         {
-            node* new_node = new node;
-            node* temp = cursor->next;
-            new_node->data = entry;
-            cursor->next = new_node;
-            temp->next = new_node;
-            cursor = temp;
-            num_items++;
-            
+            insert(entry);
         } else {
             
-            if(is_item())
+            node* new_node = new node;
+            new_node->data = entry;
+            num_items++;
+            if(cursor == tail_ptr && cursor != nullptr)
             {
-                node* new_node = new node;
-                new_node->data = entry;
+                cursor = tail_ptr;
                 cursor->next = new_node;
                 cursor = cursor->next;
-                num_items++;
-            } else {
+                tail_ptr = new_node;
+            }
+            else if (cursor != nullptr)
+            {
+                node* temp = cursor->next;
+                new_node->next = temp;
+                cursor->next = new_node;
+                precursor = cursor;
+                cursor = new_node;
+            }
 
+            if (num_items == 1) {
+                new_node->next = nullptr;
+                head_ptr = new_node;
+                cursor = new_node;
             }
             
         }
-    }
-    */
-    void Sequence::attach(const value_type& entry) {
-        
-        node* new_node = new node;
-        new_node->data = entry;
-        num_items++;
-        
-        if (cursor == tail_ptr || cursor == nullptr) { 
-            if(num_items == 1)
-            {
-                head_ptr = new_node;
-            } else {
-                tail_ptr->next = new_node;
-                
-            }
-            tail_ptr = new_node;
-        } else {  
-            node* temp = cursor->next;
-            precursor = cursor;
 
-            cursor->next = new_node;
-            new_node->next = temp;
-        }
-        
-        cursor = new_node;
     }  
 
 
@@ -166,22 +144,14 @@ namespace cs_sequence {
             num_items--;
             if(cursor->next == nullptr)
             {
+                precursor->next = nullptr;
                 delete cursor;
             } else {
-                /* 
-                node* temp_node = new node;
-                temp_node = cursor->next;
-
-                cursor = precursor;
-                cursor->next = temp_node;
-                */
                 node* temp = cursor->next;  
                 cursor->data = temp->data;  
                 cursor->next = temp->next;  
                 delete temp;
             }
-
-
         }
     } 
 
@@ -198,7 +168,7 @@ namespace cs_sequence {
         {
             return cursor->data;
         } else {
-           throw; 
+           //throw; 
         }
     }
 

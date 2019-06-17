@@ -33,7 +33,7 @@ namespace cs_sequence {
        private:
         struct node {
             size_type data;
-            node* next;
+            node* next = nullptr;
         };
         int num_items; // stores the number of items in the Sequence.
         node* head_ptr;

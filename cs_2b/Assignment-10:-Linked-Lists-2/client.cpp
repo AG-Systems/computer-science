@@ -218,38 +218,18 @@ int test1()
 	test = empty;
 	test.insert(10);
 	if (!correct(test, 1, 0, items2)) return 0;
-	
+
 	// Test the insert function to add an item at the front of a Sequence
 	cout << "I am now using attach to put 10,20,30 in an empty Sequence.\n";
 	cout << "Then I move the cursor to the start and insert 5." << endl;
 	test = empty;
 	test.attach(10);
-	std::cout << "=============" << std::endl;
-	for (test.start(); test.is_item(); test.advance()) {
-		std::cout << test.current() << " ";
-	}
-	std::cout << "\n=============" << std::endl;
 	test.attach(20);
-	std::cout << "=============" << std::endl;
-	for (test.start(); test.is_item(); test.advance()) {
-		std::cout << test.current() << " ";
-	}
-	std::cout << "\n=============" << std::endl;
 	test.attach(30);
 	test.start();
-
-	std::cout << "=============" << std::endl;
-	for (test.start(); test.is_item(); test.advance()) {
-		std::cout << test.current() << " ";
-	}
-	std::cout << "\n=============" << std::endl;
-
 	test.insert(5);
-	std::cout << "=============" << std::endl;
-	for (test.start(); test.is_item(); test.advance()) {
-		std::cout << test.current() << " ";
-	}
-	std::cout << "\n=============" << std::endl;
+
+
 	if (!correct(test, 4, 0, items1)) return 0;
 
 	// Test the insert function to add an item in the middle of a Sequence
