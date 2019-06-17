@@ -68,10 +68,25 @@ namespace cs_sequence {
 
     void Sequence::clear()
     {
-        delete cursor;
-        delete head_ptr;
-        delete tail_ptr;
-        delete precursor;
+        /* 
+        if(cursor)
+        {
+            delete cursor;
+        }
+        if(head_ptr)
+        {
+            delete head_ptr;
+        }
+        
+        if(tail_ptr)
+        {
+            delete tail_ptr;
+        }
+        if(precursor)
+        {
+            delete precursor;
+        }
+        */
         num_items = 0;
     }
 
@@ -100,7 +115,7 @@ namespace cs_sequence {
 
 
     void Sequence::attach(const value_type& entry) {
-
+        /*
         node* temp_cursor = new node;
         node* temp_precursor = new node;
         temp_cursor = cursor;
@@ -147,6 +162,52 @@ namespace cs_sequence {
         }
         delete temp_cursor;
         delete temp_precursor;
+        */
+
+        node* new_node = new node;
+        new_node->data = entry;
+        num_items++;
+
+        if(cursor == tail_ptr || cursor == nullptr)
+        {
+
+            if(cursor == tail_ptr && cursor != nullptr) /* tail exists  && cursor is at the end */
+            {
+                cursor->next = new_node;
+                tail_ptr = new_node;
+                precursor = cursor;
+                cursor = cursor->next;
+            }
+
+            if(cursor != tail_ptr && cursor == nullptr) /* tail exists && cursor is off */
+            {
+                cursor = tail_ptr;
+
+                cursor->next = new_node;
+                tail_ptr = new_node;
+                precursor = cursor;
+                cursor = cursor->next;              
+            }
+
+            if(cursor == tail_ptr && cursor == nullptr) /* list is empty */
+            {
+                tail_ptr = new_node;
+                head_ptr = new_node;
+                precursor = nullptr;
+                cursor = new_node;
+            }
+
+        } else {
+            node* temp = new node;
+            temp = cursor->next;
+            cursor->next = new_node;
+            new_node->next = temp;
+
+            precursor = cursor;
+            cursor = cursor->next;
+            // delete temp;
+
+        }
 
     }  
 
