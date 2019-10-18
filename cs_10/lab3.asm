@@ -78,13 +78,13 @@ matrix_sum_print:
       sw $t0, 0($sp)      # Store previous value
       
       la $s1, M # get array address
-      li $t0, 1 # index
+      li $t0, 0 # index
       li $t1, 0 # sum counter
       sum_loop:
       	 beq $t0, 16, sum_exit
       	  
-      	 lb $t3, 0($s1)
-      	 add $t1, $t1, $t3
+	 lw $t2, ($s1)
+      	 add $t1, $t1, $t2
       	 
     	 addi $t0, $t0, 1
     	 addi $s1, $s1, 4      	  
