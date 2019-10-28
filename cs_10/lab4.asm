@@ -175,7 +175,7 @@ matrix_print:
     li $t1, 0 # inner counter
     
     matrix_print_loop:
-    	 beq $t0, 16, matrix_print_end
+    	 beq $t0, 4, matrix_print_end
 
          la $a0, prompt # print the prompt
          li $v0,4 # "Row: "
@@ -184,12 +184,12 @@ matrix_print:
           
          row_loop:
              beq $t1, 4, row_end
-
-             la $a0, ($s3)
+             
+             lw $a0, ($s3)
              li $v0,1    # print the integer
              syscall # the ( $a0) integer index parameter is stored in $a0   
                        
-             addi $s1, $s1, 4
+             addi $t1, $t1, 4
              addi $s3, $s3, 4
              j row_loop
          row_end:
