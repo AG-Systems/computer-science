@@ -6,7 +6,11 @@ main:
     li $a1, 2 # martix 2
     jal matrix_input   # call procedure                          
                                              
-                                                                                                                                        
+    jal matrix_multiply
+                                                                                                                                                                                                                                                                    
+    jal matrix_print
+    
+    
     li $v0, 10   # terminate program run
     syscall  
     
@@ -107,17 +111,38 @@ matrix_multiply:
     li $t1, 0 # second index counter
     li $t2, 0 # third index counter
     matrix_loop_1:
-    	   beq $t0, 4, matrix_end_1
+    	   beq $t0, 4, matrix_end_1 # I
     	   
            matrix_loop_2:
-           	beq $t1, 4, matrix_end_1
+           	beq $t1, 4, matrix_end_1 # J
                 
                 lw $t3, 0($s3) # t3 = M_3[i][j]
                 
                 matrix_loop_3:
-                	beq $t2, 4, matrix_end_1
+                	beq $t2, 4, matrix_end_1 # K
                 	
+                	# t5 = i + k 
+                	add $t5, $t0, $t2
+                	# t5 = t5 * 4
+                	mul $t5, $t5, 4
+                	mul $t5, $t5, 4 # [i + k * n]
+                	add $s1, $s1, $t5 # A[i + k * n]
+                	lw $t6, 0($s1) # t6 = A[i + k * n]
+                        la $s1, M_1 # reset the head pointer for matrix 1
                 	
+                	# t6 = k + j 
+                	add $t5, $t1, $t2
+                	# t5 = t5 * 4
+                	mul $t5, $t5, 4
+                	mul $t5, $t5, 4 # B[k + j * n] 
+                	lw $t7, 0($s2) # t7 = B[k + j * n]                	
+                	la $s2, M_2 # reset the head pointer for matrix 2 
+                	
+                	# A[i + k * n] * B[i + k * n]
+                	mul $t4, $t6, $t7
+                	
+                	# cij += t4
+                	add $t3, $t3, $t4
                 	addi $t2, $t2, 1	
                 	j matrix_loop_3	
                 matrix_end_3:
@@ -140,8 +165,46 @@ matrix_multiply:
     addi $sp,$sp,4      # Moving Stack pointer 
     jr $ra              # return (Copy $ra to PC)	
 
+
+matrix_print:
+    addi $sp,$sp,-4     # Moving Stack pointer
+    sw $s7, 0($sp)      # Store previous value   
+    
+    la $s3, M_3 # get array address
+    li $t0, 0 # counter
+    li $t1, 0 # inner counter
+    
+    matrix_print_loop:
+    	 beq $t0, 16, matrix_print_end
+
+         la $a0, prompt # print the prompt
+         li $v0,4 # "Row: "
+         syscall  
+          
+          
+         row_loop:
+             beq $t1, 4, row_end
+
+             la $a0, ($s3)
+             li $v0,1    # print the integer
+             syscall # the ( $a0) integer index parameter is stored in $a0   
+                       
+             addi $s1, $s1, 4
+             addi $s3, $s3, 4
+             j row_loop
+         row_end:
+                      
+         addi $t0, $t0, 1
+        j matrix_print_loop
+    matrix_print_end:
+    
+    
+    
+    lw $t0, 0($sp)      # Load previous value
+    addi $sp,$sp,4      # Moving Stack pointer 
+    jr $ra              # return (Copy $ra to PC)
+
 .data 
-sum_prompt: .asciiz "Matrix sum: "
 prompt: .asciiz "Row "
 buffer: .space 16
 M_1: .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
