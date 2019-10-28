@@ -103,28 +103,38 @@ matrix_multiply:
     la $s3, M_3 # get array address
     
     
-    li $t0, 0 # sum counter
-    li $t1, 0 # index counter
-    
-    matrix_loop:
-           beq $t1, 16, matrix_end 
+    li $t0, 0 # first index counter
+    li $t1, 0 # second index counter
+    li $t2, 0 # third index counter
+    matrix_loop_1:
+    	   beq $t0, 4, matrix_end_1
+    	   
+           matrix_loop_2:
+           	beq $t1, 4, matrix_end_1
+                
+                lw $t3, 0($s3) # t3 = M_3[i][j]
+                
+                matrix_loop_3:
+                	beq $t2, 4, matrix_end_1
+                	
+                	
+                	addi $t2, $t2, 1	
+                	j matrix_loop_3	
+                matrix_end_3:
+                
+                sb $t3, 0($s3)
+                
+                addi $t1, $t1, 1
+                addi $s3, $s3, 4
+                j matrix_loop_2
+                
+           matrix_end_2:
            
-	   lw $t6, ($s1) 
-	   lw $t7, ($s2) 
-      	   
-	   mul $t3,$t6,$t7 # multiply by the 2 terms from matrix 1 and matrix 2 and save it to $t3
+           addi $t0, $t0, 1
+           addi $s3, $s3, 4
+           j matrix_loop_1    
+    matrix_end_1:
 	
-	   
-	   sb $t3, 0($s3)
-      	   
-      	   
-      	 
-    	   addi $t0, $t0, 1 # increase the index counter
-    	   addi $s1, $s1, 4 # increase the m1 array pointer  
-    	   addi $s2, $s2, 4 # increase the m2 array pointer
-    	   addi $s3, $s3, 4 # increase the m3 array pointer   	  
-      	   j matrix_loop           
-    matrix_end:
     
     lw $t0, 0($sp)      # Load previous value
     addi $sp,$sp,4      # Moving Stack pointer 
