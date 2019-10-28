@@ -5,15 +5,14 @@ main:
               
     li $a1, 2 # martix 2
     jal matrix_input   # call procedure                          
-    
-    jal matrix_multiply:                                            
+                                             
                                                                                                                                         
     li $v0, 10   # terminate program run
     syscall  
     
 matrix_input:
     addi $sp,$sp,-4     # Moving Stack pointer
-    sw $s7, 0($sp)      # Store previous value
+    sw $ra, 0($sp)      # Store previous value
     
             
     li $a0, 1 
@@ -30,7 +29,7 @@ matrix_input:
 
 
        
-    lw $s7, 0($sp)      # Load previous value
+    lw $ra, 0($sp)      # Load previous value
     addi $sp,$sp,4      # Moving Stack pointer 
     jr $ra              # return (Copy $ra to PC)   
     
@@ -107,8 +106,8 @@ matrix_multiply:
     li $t0, 0 # sum counter
     li $t1, 0 # index counter
     
-    loop:
-           beq $t1, 16, end 
+    matrix_loop:
+           beq $t1, 16, matrix_end 
            
 	   lw $t6, ($s1) 
 	   lw $t7, ($s2) 
@@ -124,8 +123,8 @@ matrix_multiply:
     	   addi $s1, $s1, 4 # increase the m1 array pointer  
     	   addi $s2, $s2, 4 # increase the m2 array pointer
     	   addi $s3, $s3, 4 # increase the m3 array pointer   	  
-      	   j end           
-    end:
+      	   j matrix_loop           
+    matrix_end:
     
     lw $t0, 0($sp)      # Load previous value
     addi $sp,$sp,4      # Moving Stack pointer 
