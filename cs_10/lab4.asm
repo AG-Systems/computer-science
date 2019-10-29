@@ -106,59 +106,375 @@ matrix_multiply:
     la $s2, M_2 # get array address
     la $s3, M_3 # get array address
     
-    
-    li $t0, 0 # first index counter
-    li $t1, 0 # second index counter
-    li $t2, 0 # third index counter
-    matrix_loop_1:
-    	   beq $t0, 4, matrix_end_1 # I
-    	   
-           matrix_loop_2:
-           	beq $t1, 4, matrix_end_1 # J
-                
-                lw $t3, 0($s3) # t3 = M_3[i][j]
-                
-                matrix_loop_3:
-                	beq $t2, 4, matrix_end_1 # K
-                	
-                	# t5 = i + k 
-                	add $t5, $t0, $t2
-                	# t5 = t5 * 4
-                	mul $t5, $t5, 4
-                	mul $t5, $t5, 4 # [i + k * n]
-                	add $s1, $s1, $t5 # A[i + k * n]
-                	lw $t6, 0($s1) # t6 = A[i + k * n]
-                        la $s1, M_1 # reset the head pointer for matrix 1
-                	
-                	# t6 = k + j 
-                	add $t5, $t1, $t2
-                	# t5 = t5 * 4
-                	mul $t5, $t5, 4
-                	mul $t5, $t5, 4 # B[k + j * n] 
-                	lw $t7, 0($s2) # t7 = B[k + j * n]                	
-                	la $s2, M_2 # reset the head pointer for matrix 2 
-                	
-                	# A[i + k * n] * B[i + k * n]
-                	mul $t4, $t6, $t7
-                	
-                	# cij += t4
-                	add $t3, $t3, $t4
-                	addi $t2, $t2, 1	
-                	j matrix_loop_3	
-                matrix_end_3:
-                
-                sb $t3, 0($s3)
-                
-                addi $t1, $t1, 1
-                addi $s3, $s3, 4
-                j matrix_loop_2
-                
-           matrix_end_2:
-           
-           addi $t0, $t0, 1
-           addi $s3, $s3, 4
-           j matrix_loop_1    
-    matrix_end_1:
+         li $t1, 0 # I index counter
+         li $t3, 0 # cij 
+    	m_col_row_1:
+    		beq $t1, 4, m_col_row_1
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_1_end
+    	m_col_row_1_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0
+    	li $t1, 0
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 4
+    	m_col_row_2:
+    		beq $t1, 4, m_col_row_2
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_2_end
+    	m_col_row_2_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0 
+    	li $t1, 0   	
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 8    
+     	m_col_row_3:
+    		beq $t1, 4, m_col_row_3
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_3_end
+    	m_col_row_3_end: 
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 12    
+     	m_col_row_4:
+    		beq $t1, 4, m_col_row_4
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_4_end
+    	m_col_row_4_end:    
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4	
+
+
+
+	
+
+	
+	m_col_row_5:
+    		beq $t1, 4, m_col_row_5
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_5_end
+    	m_col_row_5_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0
+    	li $t1, 0
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s1, $s1, 12
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 4
+    	m_col_row_6:
+    		beq $t1, 4, m_col_row_6
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_6_end
+    	m_col_row_6_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0 
+    	li $t1, 0   	
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 12
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 8    
+     	m_col_row_7:
+    		beq $t1, 4, m_col_row_7
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_7_end
+    	m_col_row_7_end: 
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 12
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 12    
+     	m_col_row_8:
+    		beq $t1, 4, m_col_row_8
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_8_end
+    	m_col_row_8_end:    
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 12
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4	
+	
+
+
+
+
+
+
+
+
+
+
+	m_col_row_9:
+    		beq $t1, 4, m_col_row_9
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_9_end
+    	m_col_row_9_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0
+    	li $t1, 0
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s1, $s1, 24
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 4
+    	m_col_row_10:
+    		beq $t1, 4, m_col_row_10
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_10_end
+    	m_col_row_10_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0 
+    	li $t1, 0   	
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 24
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 8    
+     	m_col_row_11:
+    		beq $t1, 4, m_col_row_11
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_11_end
+    	m_col_row_11_end: 
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 24
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 12    
+     	m_col_row_12:
+    		beq $t1, 4, m_col_row_12
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_12_end
+    	m_col_row_12_end:    
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 24
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4
+
+	
+		
+			
+
+	m_col_row_13:
+    		beq $t1, 4, m_col_row_13
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_13_end
+    	m_col_row_13_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0
+    	li $t1, 0
+        la $s1, M_1 # get array address
+        la $s2, M_2 # get array address
+        addi $s1, $s1, 24
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 4
+    	m_col_row_14:
+    		beq $t1, 4, m_col_row_14
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_14_end
+    	m_col_row_14_end:
+    	sb $t3, 0($s3)
+    	li $t3, 0 
+    	li $t1, 0   	
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 24
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 8    
+     	m_col_row_15:
+    		beq $t1, 4, m_col_row_15
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_15_end
+    	m_col_row_15_end: 
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 24
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4 
+        addi $s2, $s2, 12    
+     	m_col_row_16:
+    		beq $t1, 4, m_col_row_16
+    		
+    		lb $t4, 0($s1)
+    		lb $t5, 0($s2)
+    		
+    		mul $t6, $t4, $t5
+    		add $t3, $t3, $t6
+    		
+    		addi $s2, $s2, 16
+    		addi $s1, $s1, 4
+    		addi $t1, $t1, 1
+    		j m_col_row_16_end
+    	m_col_row_16_end:    
+    	sb $t3, 0($s3)
+    	li $t3, 0    
+        li $t1, 0
+        la $s1, M_1 # get array address
+        addi $s1, $s1, 24
+        la $s2, M_2 # get array address
+        addi $s3, $s3, 4	
+			
 	
     
     lw $t0, 0($sp)      # Load previous value
