@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include<iterator>
 #include "sublist.h"
 
 using namespace std;
@@ -14,9 +15,11 @@ int main()
    int TARGET = 180;
    vector<int> dataSet;
    vector<Sublist> choices;
+   /*
    vector<Sublist>::iterator iter, iterBest;
    int k, j, numSets, max, masterSum;
    bool foundPerfect;
+   */
 
    dataSet.push_back(20); 
    dataSet.push_back(12); 
@@ -29,13 +32,13 @@ int main()
    dataSet.push_back(11); 
    dataSet.push_back(13); 
    dataSet.push_back(17);
-
-   choices.clear();
+   // choices.clear();
    cout << "Target time: " << TARGET << endl;
-   
-
-
-   iterBest->showSublist();
+   Sublist sub_list_1;
+   sub_list_1.algorithm(TARGET,dataSet);
+   choices.push_back(sub_list_1);
+   sub_list_1.showSublist();
+   // iterBest->showSublist();
    
 
    return 0; 
