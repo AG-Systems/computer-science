@@ -30,7 +30,6 @@ namespace cs_sublist {
             int entire_sum = 0;
             for(int index = 0; index < list.size(); index++)
             {
-                cout << list[index] << endl;
                 entire_sum += list[index];
             }
             if(target >= entire_sum)
@@ -38,47 +37,32 @@ namespace cs_sublist {
                 sub_list = list;
                 return;
             }
-
-            	
-            int highest_sum[3] = { 0,1,list.size() };  // highest sum, left_index, right_index
-
-            for(int left_index = 1; left_index <= list.size(); left_index++)
+            vector<vector<int> > total_sub_lists;
+            for(int i = 0; i <= list.size(); i++)
             {
-                    int left_side_sum = list[left_index];
-                    int right_index = left_index += 1;
-                    while (right_index < list.size() - 1)
-                    {
-                        if(left_side_sum == target)
-                        {
-                            found_perfect = true;
-                            for(int index = left_side_sum; index <= right_index; index++)
-                            {
-                                sub_list_sum = left_side_sum;
-                                sub_list.push_back(list[index]); 
-                            }
-
-                            return;
-
-                        }
-                        left_side_sum = left_side_sum + list[left_index]; 
-                        right_index += 1; 
-                        
-                        if(left_side_sum > highest_sum[0] && left_side_sum <= target)
-                        {
-                            highest_sum[0] = left_side_sum;
-                            highest_sum[1] = left_index;
-                            highest_sum[2] = right_index;
-                        }
-                    }
-
-
+                for(int j = i + 1; j <= list.size(); j++)
+                {
+                    cout << i << " " << j << endl;
+                    total_sub_lists.push_back(vector<int>(list.begin() + i, list.begin() + j));
+                }
             }
             
-            sub_list_sum = highest_sum[0];
-            for(int index = highest_sum[1]; index <= highest_sum[2]; index++)
+            int max_sub_list_sum = 0;
+
+            for(int i = 0; i < total_sub_lists.size(); i++)
             {
-                sub_list.push_back(list[index]);                
+                int current_sub_list_sum = 0;
+                for(int j = 0; j < total_sub_lists[i].size(); j++)
+                {
+                    current_sub_list_sum += total_sub_lists[i][j];
+                }
+                if(current_sub_list_sum > max_sub_list_sum && current_sub_list_sum < target)
+                {
+                    max_sub_list_sum = current_sub_list_sum;
+                    sub_list = total_sub_lists[i];
+                }
             }
+            sub_list_sum  = max_sub_list_sum;          
 
         }  
 
