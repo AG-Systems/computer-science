@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+
 using namespace std;
 
 namespace cs_sublist {
@@ -13,62 +14,90 @@ namespace cs_sublist {
       public:
         Sublist() 
         { 
-            
+            found_perfect = false;
+            sub_list_sum = 0;
         } 
 
         ~Sublist() 
         { 
-            
+            sub_list.clear();
+            found_perfect = false;
         }          
 
         void algorithm(int target, vector<int>& list)
         {
-            int current_highest = list[0];
-            int highest_ending = list[0];
-
-            int left = 0;
-            int right = list.size();
-
-            for(int i = 1; i < list.size(); i++)
+            sub_list.clear();
+            int entire_sum = 0;
+            for(int index = 0; index < list.size(); index++)
             {
-                
-                if(highest_ending + list[i] > list[i])
-                {
-                    highest_ending = highest_ending + list[i];
-                } else {
-                    highest_ending = list[i];
-                    left += 1;
-                }
-
-                int temp = 0;
-                if(highest_ending > current_highest)
-                {
-                    temp = highest_ending;
-                    
-                } else {
-                    temp = current_highest;
-                }
-
-                if(temp <= target)
-                {
-                    current_highest = temp;
-                }
-                
+                cout << list[index] << endl;
+                entire_sum += list[index];
+            }
+            if(target >= entire_sum)
+            {
+                sub_list = list;
+                return;
             }
 
+            	
+            int highest_sum[3] = { 0,1,list.size() };  // highest sum, left_index, right_index
+
+            for(int left_index = 1; left_index <= list.size(); left_index++)
+            {
+                    int left_side_sum = list[left_index];
+                    int right_index = left_index += 1;
+                    while (right_index < list.size() - 1)
+                    {
+                        if(left_side_sum == target)
+                        {
+                            found_perfect = true;
+                            for(int index = left_side_sum; index <= right_index; index++)
+                            {
+                                sub_list_sum = left_side_sum;
+                                sub_list.push_back(list[index]); 
+                            }
+
+                            return;
+
+                        }
+                        left_side_sum = left_side_sum + list[left_index]; 
+                        right_index += 1; 
+                        
+                        if(left_side_sum > highest_sum[0] && left_side_sum <= target)
+                        {
+                            highest_sum[0] = left_side_sum;
+                            highest_sum[1] = left_index;
+                            highest_sum[2] = right_index;
+                        }
+                    }
 
 
-
+            }
+            
+            sub_list_sum = highest_sum[0];
+            for(int index = highest_sum[1]; index <= highest_sum[2]; index++)
+            {
+                sub_list.push_back(list[index]);                
+            }
 
         }  
 
         void showSublist()
         {
+            cout << "Sublist -----------------------------" << endl;
+            cout << "Sum: " << sub_list_sum << endl;
 
+            for(int i = 0; i < sub_list.size(); i++)
+            {
+                cout << "array[" << i << "] = " << sub_list[i] << endl;
+            }
+            cout << "found target perfectly: " << found_perfect << endl;
         }
 
       private:
-
+            bool found_perfect;
+            int sub_list_sum;
+            vector<int> sub_list;
    }; 
 
 }
