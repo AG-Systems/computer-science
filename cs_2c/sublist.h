@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-
+#include <numeric> 
 
 using namespace std;
 
@@ -15,12 +15,13 @@ namespace cs_sublist {
         Sublist() 
         { 
             found_perfect = false;
-            sub_list_sum = 0;
+            global_sub_list_sum = 0;
         } 
 
         ~Sublist() 
         { 
             sub_list.clear();
+            global_sub_list_sum = 0;
             found_perfect = false;
         }          
 
@@ -35,41 +36,70 @@ namespace cs_sublist {
             if(target >= entire_sum)
             {
                 sub_list = list;
+                global_sub_list_sum = entire_sum;
                 return;
             }
             vector<vector<int> > total_sub_lists;
-            for(int i = 0; i <= list.size(); i++)
-            {
-                for(int j = i + 1; j <= list.size(); j++)
-                {
-                    cout << i << " " << j << endl;
-                    total_sub_lists.push_back(vector<int>(list.begin() + i, list.begin() + j));
-                }
-            }
-            
-            int max_sub_list_sum = 0;
+            vector<int> temp; 
+            temp.push_back(list[0]);
+            total_sub_lists.push_back(temp);
 
-            for(int i = 0; i < total_sub_lists.size(); i++)
+            for(int i = 1; i < list.size(); i++)
             {
-                int current_sub_list_sum = 0;
-                for(int j = 0; j < total_sub_lists[i].size(); j++)
+                int j = 0;
+
+                while (j < total_sub_lists.size())
                 {
-                    current_sub_list_sum += total_sub_lists[i][j];
+                    int current_sub_list_sum = accumulate(total_sub_lists[j].begin(), total_sub_lists[j].end(), 0);
+                    //debug(total_sub_lists[j]);
+                    cout << list[i] << endl;
+                    if(current_sub_list_sum + list[i] <= target)
+                    {
+                        total_sub_lists[j].push_back(list[i]);
+                        total_sub_lists.push_back(total_sub_lists[j]);
+                    }
+                    if(current_sub_list_sum + list[i] == target)
+                    {
+                        found_perfect = true;
+                        global_sub_list_sum = target;
+                        break;
+                    }
+                    j++;
                 }
-                if(current_sub_list_sum > max_sub_list_sum && current_sub_list_sum < target)
+                
+                if(found_perfect)
                 {
-                    max_sub_list_sum = current_sub_list_sum;
-                    sub_list = total_sub_lists[i];
+                    break;
                 }
             }
-            sub_list_sum  = max_sub_list_sum;          
+
+            int highest_sum = 0;
+            int highest_sum_index = 0;
+            if(found_perfect)
+            {
+                sub_list = total_sub_lists[total_sub_lists.size() - 1];
+            } else {
+                for(int i = 0; i < total_sub_lists.size(); i++)
+                {
+                    int current_sub_list_sum = accumulate(total_sub_lists[i].begin(), total_sub_lists[i].end(), 0);
+                    if(current_sub_list_sum > highest_sum && current_sub_list_sum <= target)
+                    {
+                        highest_sum =  current_sub_list_sum;
+                        highest_sum_index = i;
+                    }
+                }
+
+                sub_list = total_sub_lists[highest_sum_index];
+                global_sub_list_sum = highest_sum;
+
+            }
 
         }  
 
         void showSublist()
         {
             cout << "Sublist -----------------------------" << endl;
-            cout << "Sum: " << sub_list_sum << endl;
+            cout << "Sum: " << global_sub_list_sum << endl;
 
             for(int i = 0; i < sub_list.size(); i++)
             {
@@ -80,8 +110,18 @@ namespace cs_sublist {
 
       private:
             bool found_perfect;
-            int sub_list_sum;
+            int global_sub_list_sum;
             vector<int> sub_list;
+
+            void debug(vector<int>& list)
+            {
+                cout << "debug: =====================" << endl;
+                for(int i = 0; i < list.size(); i++)
+                {
+                    cout << list[i] << endl;
+                }
+                cout << "debug end: =====================" << endl;
+            }
    }; 
 
 }
