@@ -43,20 +43,20 @@ namespace cs_sublist {
             vector<int> temp; 
             temp.push_back(list[0]);
             total_sub_lists.push_back(temp);
+            
 
             for(int i = 1; i < list.size(); i++)
             {
                 int j = 0;
-
-                while (j < total_sub_lists.size())
+                int col_size = total_sub_lists.size();
+                for(int j = 0; j < col_size; j++)
                 {
                     int current_sub_list_sum = accumulate(total_sub_lists[j].begin(), total_sub_lists[j].end(), 0);
-                    //debug(total_sub_lists[j]);
-                    cout << list[i] << endl;
                     if(current_sub_list_sum + list[i] <= target)
                     {
-                        total_sub_lists[j].push_back(list[i]);
-                        total_sub_lists.push_back(total_sub_lists[j]);
+                        vector<int> temp = total_sub_lists[j];
+                        temp.push_back(list[i]);
+                        total_sub_lists.push_back(temp);
                     }
                     if(current_sub_list_sum + list[i] == target)
                     {
@@ -64,7 +64,6 @@ namespace cs_sublist {
                         global_sub_list_sum = target;
                         break;
                     }
-                    j++;
                 }
                 
                 if(found_perfect)
