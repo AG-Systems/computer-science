@@ -60,3 +60,31 @@ int main()
 
    return 0; 
 }
+
+
+/* --------- OUTPUT -----------
+Target time: 3600
+Sublist -----------------------------
+Sum: 3600
+array[0] = Cowboy Casanova by Carrie Underwood(236)
+array[1] = Quitter by Carrie Underwood(220)
+array[2] = Russian Roulette by Rihanna(228)
+array[3] = Monkey Wrench by Foo Fighters(230)
+array[4] = Pretending by Eric Clapton(283)
+array[5] = Bad Love by Eric Clapton(308)
+array[6] = Everybody's In The Mood by Howlin' Wolf(178)
+array[7] = Well That's All Right by Howlin' Wolf(175)
+array[8] = Samson and Delilah by Reverend Gary Davis(216)
+array[9] = Hot Cha by Roy Buchanan(208)
+array[10] = Green Onions by Roy Buchanan(443)
+array[11] = I'm Just a Prisoner by Janiva Magness(230)
+array[12] = You Were Never Mine by Janiva Magness(276)
+array[13] = Hobo Blues by John Lee Hooker(187)
+array[14] = I Can't Quit You Baby by John Lee Hooker(182)
+found target perfectly: 1
+
+Algorithm Elapsed Time: 0.214 seconds.
+
+
+
+----------------------------  */
