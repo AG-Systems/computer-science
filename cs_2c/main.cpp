@@ -33,13 +33,48 @@ int main()
    dataSet.push_back(13); 
    dataSet.push_back(17);
    // choices.clear();
+   cout << "test 1: " << endl;
    cout << "Target time: " << TARGET << endl;
    Sublist sub_list_1;
    sub_list_1.algorithm(TARGET,dataSet);
    choices.push_back(sub_list_1);
    sub_list_1.showSublist();
    // iterBest->showSublist();
+
+
+
+
+   cout << "test 2: " << endl;
+   cout << "Target time: " << 179 << endl;
+   Sublist sub_list_2;
+   sub_list_2.algorithm(179,dataSet);
+   choices.push_back(sub_list_2);
+   sub_list_2.showSublist();   
+
+
+   cout << "test 3: " << endl;
+   cout << "Target time: " << 5000 << endl;
+   Sublist sub_list_3;
+   sub_list_3.algorithm(5000,dataSet);
+   choices.push_back(sub_list_3);
+   sub_list_3.showSublist();   
+
+   dataSet.clear();
+   dataSet.push_back(3);
+   dataSet.push_back(20);
+   dataSet.push_back(9);
+   dataSet.push_back(5);
+   dataSet.push_back(7);
+   dataSet.push_back(18);
    
+   TARGET = 37;
+
+   cout << "test 4: " << endl;
+   cout << "Target time: " << TARGET << endl;
+   Sublist sub_list_4;
+   sub_list_4.algorithm(TARGET,dataSet);
+   choices.push_back(sub_list_4);
+   sub_list_4.showSublist();   
 
    return 0; 
 }
