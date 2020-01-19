@@ -2,6 +2,7 @@
 using namespace std;
 // using namespace cs_sparse;
 #include "FHsparseMat.h"
+// #include "test.h"
 
 #define MAT_SIZE 100000
 typedef SparseMat<float> SpMat;
