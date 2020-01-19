@@ -2,7 +2,7 @@
 #include "FHlist.h"
 #include <iostream>
 #include <vector>
-
+#include <iterator>
 
 
 using namespace std;
@@ -26,62 +26,137 @@ class MatNode
 template <class T = int>
 class SparseMat 
 {
+    protected:
+
+
+        T default_value;
+        int num_of_rows = 0;
+        int num_of_columns = 0;
+        
+
+        typedef FHlist< MatNode<T> > list_columns;
+        typedef FHvector<list_columns> Vector;
+        
+        Vector vector_rows;
+
     public:
 
         SparseMat(int rows, int columns, T def_value)
         {
-            num_of_rows = rows;
-            num_of_columns = columns;
-            default_value = def_value;
-            for(int z = 0; z < num_of_rows; z++)
+            if(rows >= 1)
             {
-                FHlist<float> c;
-                vector_rows.push_back(c);
-            }            
+                num_of_rows = rows;
+            } else {
+                num_of_rows = 1;
+            }
+
+            if(columns >= 1)
+            {
+                num_of_columns = columns;
+            } else {
+                num_of_columns = 1;
+            }
+            vector_rows.resize(num_of_rows);
+            default_value = def_value;        
         }
 
         ~SparseMat()
         {
             num_of_rows = 0;
             num_of_columns = 0;
-            default_value = 0;  
-            /*
-            for(int z = 0; z < num_of_rows; z++)
-            {
-                delete vector_rows[z];
-            } 
-            */             
+            clear();       
         }
-
-        bool set(int row, int column, int val)
+        bool set(int row, int column, const T &target_value)
         {
-            if(row > num_of_rows)
+            
+            if(row >= num_of_rows || row < 0 || column < 0 || column >= num_of_columns)
             {
                 return false;
             } else {
-
+                list_columns& selected_row = vector_rows[row];
+                typename list_columns::iterator cur = selected_row.begin();
+                while(cur != selected_row.end())
+                {
+                    
+                    int obj_col = (*cur).getCol();
+                    if(obj_col == column)
+                    {
+                        break;
+                    }
+                    cur++;
+                }
+                if(target_value == default_value)
+                {
+                    if(selected_row.end() != cur)
+                    {
+                        selected_row.erase(cur);
+                        return true;
+                    }
+                    return false;
+                } else {
+                    if(selected_row.end() == cur)
+                    {
+                        MatNode<T> Node(column, target_value);
+                        selected_row.insert(cur, Node);
+                    } else
+                    {
+                        *cur = target_value;
+                    }
+                    return true;
+                }
+                   
             }
+            
         }
+
 
         void clear()
         {
-
+            
+            for(int z = 0; z < num_of_rows; z++)
+            {
+                vector_rows[z].clear(); // automatically cleans out each list
+            }
+            // vector_rows.resize(num_of_rows);
+            
         }
 
-        
-        int get(int row, int column) const {
+        const T& get(int row, int column) const {
+            if(row >= num_of_rows || row < 0 || column < 0 || column >= num_of_columns)
+            {
+                throw row;
+            }
 
+            typename list_columns::const_iterator cur = vector_rows[row].begin();
+            while(cur != vector_rows[row].end())
+            {
+                
+                int obj_col = (*cur).getCol();
+                if(obj_col == column)
+                {
+                    return (*cur).data;
+                }
+                    
+                cur++;
+            }
+
+            // throw row; 
+            
         }  
 
         void showSubSquare(int start, int size)
         {
-
+            int length = start + size - 1;
+            for(int i = start; i <= length; i++)
+            {
+                for(int j = start; j <= length; j++)
+                {
+                    cout << get(i, j) << "  ";
+                }
+                cout << "\n";
+            }
         }
 
-    protected:
-        T default_value = 0;
-        int num_of_rows = 0;
-        int num_of_columns = 0;
-        FHlist< MatNode<T> > MatRow;
-        FHvector<MatRow> rows;
+
+        
 };
